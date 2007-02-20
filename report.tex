@@ -1,5 +1,11 @@
-\documentclass[a4paper]{book}
+\documentclass[a4paper,titlepage]{book}
 \usepackage[pdftex]{graphicx}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{bibunits}
+\usepackage{fancybox}
+
+\bibliographystyle{plainnat}
 
 \title{Interpolative Playlist Generation}
 \author{Jamil George Bashi (92432)\\
@@ -9,25 +15,11 @@
 \date{\Large 2007}
 
 \begin{document}
-\pagestyle{empty}
-% cover sheet
-% This should contain your name, your degree programme and department, 
-% your candidate number, the title of the project, the name of your 
-% project supervisor and the calendar year of submission.
-\begin{titlepage}
-% sussex logo
-\maketitle
-\end{titlepage}
-\cleardoublepage
-This report is submitted as part requirement for the degree of Music Informatics
-at the University of Sussex. It is the product of my own labour except where
-indicated in the text. The report may be freely copied and distributed
-provided the source is acknowledged.\\[3cm]
-\hrulefill
-\cleardoublepage
-\tableofcontents
-\cleardoublepage
+\input{front/front}
+\mainmatter
 \pagestyle{headings}
-\section{woot}
-yeah!
+\chapter{woot}
+\pagenumbering{arabic}
+see \citep*{klapuri-transcription} woo!
+\input{appendicies/appendicies}
 \end{document}
