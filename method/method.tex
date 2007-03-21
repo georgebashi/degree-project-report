@@ -1,0 +1,24 @@
+\chapter{Method (3500)}
+\section{Overview}
+Talk about how this works (decode audio, extract features, measure similarity, interpolate) as a general overview
+\subsection{Feature Extraction}
+go into depth about feature extraction, talk about each extractor, how it works and what it models/looks for\\
+talk about reasons not to implement a shit tonne and/or MFCC
+\subsection{Similarity Measure}
+problems of similarity measure - having to normalise the vectors\\
+feature weights \& training
+\subsection{Playlist Generation}
+user interface
+\section{Implementation}
+issues with implementation
+\begin{itemize}
+	\item Benefits of two-pass, analyse/search method: faster to generate playlists, library rebuilt far less often than playlists generated
+	\item simple arithmetic to generate playlist = fast enough (maybe?) to run on portable device
+	\item only processes wav files - not important for demoing the ability of playlist generation
+\end{itemize}
+\section{Critique}
+\begin{itemize}
+	\item features of the selected paradigm and justification
+	\item advantages and disadvantages of my implementation / approach
+\end{itemize}
+

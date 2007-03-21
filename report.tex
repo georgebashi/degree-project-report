@@ -1,9 +1,9 @@
-\documentclass[a4paper,titlepage]{book}
+\documentclass[a4paper,titlepage]{report}
 \usepackage[pdftex]{graphicx}
 \usepackage{hyperref}
 \usepackage{natbib}
-\usepackage{bibunits}
 \usepackage{fancybox}
+\usepackage{amsmath}
 
 \bibliographystyle{plainnat}
 
@@ -16,10 +16,14 @@
 
 \begin{document}
 \input{front/front}
-\mainmatter
 \pagestyle{headings}
-\chapter{woot}
 \pagenumbering{arabic}
-see \citep*{klapuri-transcription} woo!
+\input{introduction/introduction}
+\input{review/review}
+\input{spec/spec}
+\input{method/method}
+\input{testing/testing}
+\input{conclusion/conclusion}
 \input{appendicies/appendicies}
 \end{document}
+

@@ -1,0 +1,23 @@
+\chapter{Specifications and Requirement Analysis (2000)}
+\section{Specifications}
+% set out what my software has to do
+Analyse the user's media library in a feaseable time-frame (overnight)\\
+Provide a simpler method of playlist generation than selecting individual tracks\\
+Base playlist generation purely on analysis of audio data
+\subsection{Extensions}
+Provide GUI\\
+Run on portable devices
+\section{Requirement Analysis}
+By looking at the core functionality of the application itself, I can set out more specific requirements about the software.
+\subsection{Storage Requirements}
+BDB vs data files\\
+Size constraints
+\subsection{Software / Library Requirements}
+Audio decoder (extension to include compressed audio)\\
+FFTW3
+\subsection{Usability Requirements}
+Commandline interface - simplest to write and guis can easily be written to use the commandline tools in the background\\
+Tidier to store things in DB
+% Body of report - this should include a requirement analysis and specification of the problem you have tackled. It should also include a description of how you have designed, built and evaluated your system. The exact form of this will vary from project to project but it will usually occupy several chapters and will often include sections on implementation and testing. Any software projects should included a discussion of the principles which underlie the program which has been written: the significance of its data structures, the way that its procedures and modules interact etc. A line by line description of your code is not necessarily the best way of achieving this and is not encouraged.
+\input{spec/professional_considerations}
+
