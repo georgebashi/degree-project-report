@@ -1,24 +1,80 @@
-\chapter{Method (3500)}
+\chapter{Method, Design, and Implementation (3500)}
 \section{Overview}
 Talk about how this works (decode audio, extract features, measure similarity, interpolate) as a general overview
+\section{Theory \& Principles}
+Explain the theory behind all this (psychoacoustics, DSP, etc.)
 \subsection{Feature Extraction}
-go into depth about feature extraction, talk about each extractor, how it works and what it models/looks for\\
-talk about reasons not to implement a shit tonne and/or MFCC
+\begin{itemize}
+	\item go into depth about feature extraction, talk about each extractor, how it works and what it models/looks for
+\end{itemize}
+\subsection{Signal Descriptors}
+\begin{itemize}
+	\item Explain what this means, what these features show
+\end{itemize}
+\subsubsection{Zero Crossing Rate}
+\subsubsection{First Order Autocorrelation}
+\subsection{Spectral Descriptors}
+\begin{itemize}
+	\item Explain what this means, what these features show
+\end{itemize}
+\subsubsection{Linear Regression}
+\subsubsection{Centroid}
+\subsubsection{Intensity}
+\subsubsection{Smoothness}
+\subsubsection{Spread}
+\subsubsection{Dissymmetry}
+\subsection{Commentry(?)}
+\begin{itemize}
+	\item talk about reasons not to implement a shit tonne
+	\item other possible extractors - MFCC, others used in Marsyas
+\end{itemize}
 \subsection{Similarity Measure}
-problems of similarity measure - having to normalise the vectors\\
-feature weights \& training
+\begin{itemize}
+	\item problems of similarity measure
+	\begin{itemize}
+		\item having to normalise the vectors
+		\item choices of algorithm for how to compare tracks - how does order of comparison affect results in similarity measure?
+		\begin{itemize}
+			\item 3sec blocks give bias to songs with beat aligned to block boundary (combatted by overall song features) - compare blocks in neighbouring groups to beat this
+			\item structure (verse/chorus, intro, delay at start) will strongly affect a simple ordered comparison
+			\item sorted \& total comparisons give `complete' comparison of track, though take O(n!) time to complete
+			\item ``as of such I have implemented four techniques and will see which is best'' (har har)
+		\end{itemize}
+		\item NaN problems
+	\end{itemize}
+	\item feature weights - why have them, why train them
+\end{itemize}
 \subsection{Playlist Generation}
 user interface
+\subsection{Weight Optimisation}
+why have weights for the features, why train them
+\begin{itemize}
+	\item explain how the weight training works - listener testing app which plays three clips, the user selects which two are most similar
+	\item why this helps us
+	\item what we can use the results for
+	\item other ways of collecting similar data
+	\begin{itemize}
+		\item tracks off the same album most likely similar - especially in the case of a compilation album
+		\item last.fm and other services ``similar songs'' based on statistics can be used as a guide to the training on which songs are simliar
+	\end{itemize}
+\end{itemize}
+\begin{itemize}
+	\item system can discover important features for itself
+	\item as it is not completely understood how we percieve sound, feature extractors only work as a basic model, therefore it is best to use lots of these models and let empirical evidence from testing `teach' the system the best models to use
+	\item weights will help the system return results similar to the results given by the user - the perfect system would take the data learned from the user in the testing app and return identical results - we can test how similar the results of our system is to the user's output for a good measure of the efficacy of the system
+\end{itemize}
 \section{Implementation}
 issues with implementation
 \begin{itemize}
 	\item Benefits of two-pass, analyse/search method: faster to generate playlists, library rebuilt far less often than playlists generated
 	\item simple arithmetic to generate playlist = fast enough (maybe?) to run on portable device
-	\item only processes wav files - not important for demoing the ability of playlist generation
+	\begin{itemize}
+		\item it is possible to precalcuate all distances between songs - size/speed tradeoff - take up more space on portable device but trivial to generate playlists on-the-go
+	\end{itemize}
 \end{itemize}
-\section{Critique}
+\section{Critique (of Design)}
 \begin{itemize}
 	\item features of the selected paradigm and justification
 	\item advantages and disadvantages of my implementation / approach
+	\item draw up a table in notes, easier to relate things
 \end{itemize}
-

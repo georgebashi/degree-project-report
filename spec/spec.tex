@@ -1,23 +1,73 @@
+% Body of report - this should include a requirement analysis and specification of the problem you have tackled.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                      JUSTIFY ALL MY CHOICES                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
 \chapter{Specifications and Requirement Analysis (2000)}
 \section{Specifications}
 % set out what my software has to do
-Analyse the user's media library in a feaseable time-frame (overnight)\\
-Provide a simpler method of playlist generation than selecting individual tracks\\
-Base playlist generation purely on analysis of audio data
+\begin{itemize}
+	\item Why specify system behaviour
+	\item Why it helps
+	\item Relate back to software review
+	\item Overview
+\end{itemize}
+\begin{itemize}
+	\item Analyse the user's media library in a feaseable time-frame (overnight)
+	\item Avoid storing too much data (slow, uses lots of disk space etc)
+	\item Provide a simpler method of playlist generation than selecting individual tracks
+	\item Base playlist generation purely on analysis of audio data
+\end{itemize}
+\begin{itemize}
+	\item 
+\end 
 \subsection{Extensions}
-Provide GUI\\
-Run on portable devices
+\begin{itemize}
+	\item Provide GUI
+	\item Run on portable devices
+\end{itemize}
 \section{Requirement Analysis}
-By looking at the core functionality of the application itself, I can set out more specific requirements about the software.
-\subsection{Storage Requirements}
-BDB vs data files\\
-Size constraints
-\subsection{Software / Library Requirements}
-Audio decoder (extension to include compressed audio)\\
-FFTW3
-\subsection{Usability Requirements}
-Commandline interface - simplest to write and guis can easily be written to use the commandline tools in the background\\
-Tidier to store things in DB
-% Body of report - this should include a requirement analysis and specification of the problem you have tackled. It should also include a description of how you have designed, built and evaluated your system. The exact form of this will vary from project to project but it will usually occupy several chapters and will often include sections on implementation and testing. Any software projects should included a discussion of the principles which underlie the program which has been written: the significance of its data structures, the way that its procedures and modules interact etc. A line by line description of your code is not necessarily the best way of achieving this and is not encouraged.
-\input{spec/professional_considerations}
 
+By looking at the core functionality of the application itself,
+I can set out more specific requirements about the software.
+\subsection{Software \& Library Requirements}
+\begin{itemize}
+	\item Give background on libraries used and what they are used for
+	\item Give alternatives to some libraries and explain why they wern't used (Marsyas and MAAATE)
+	\begin{itemize}
+		\item lack of knowledge of libraries - would have taken as long to learn it as to have written it myself
+		\item too big to leverage into the proof-of-concept example needed
+		\item wouldn't allow as much flexibility in operation of the program
+		\item this way is easier to modify in future to add more extractors / build on in any way
+		\item why they would have been good
+		\begin{itemize}
+			\item easier to chop and change between features (not important for my project)
+			\item ?
+		\end{itemize}
+	\end{itemize}
+	\item GStreamer (vs. libmad, libogg/vorbis, libflac; directsound)
+	\item libsndfile
+	\item FFTW3 (vs. hand coded - OMG)
+	\item libpopt (vs. hand coded - just lazy)
+\end
+\subsection{Usability Requirements}
+\begin{itemize}
+	\item Interface
+	\begin{itemize}
+		\item commandline as its simplest to write
+		\item guis can easily be written to use the commandline tools in the background
+	\end
+	\item Storage
+	\begin{itemize}
+		\item Seperate files easier to code \& debug
+		\item Database slightly less reliable (moved files need to be recalculated) but much faster \& tidier
+		\item Data stored on each track needs to be small so as not to take too much disk space
+	\end{itemize}
+\end
+% It should also include a description of how you have designed, built and evaluated your system.
+% The exact form of this will vary from project to project but it will usually occupy several chapters
+% and will often include sections on implementation and testing. Any software projects should included a 
+% discussion of the principles which underlie the program which has been written: the significance of its data
+% structures, the way that its procedures and modules interact etc.
+\input{spec/professional_considerations}
