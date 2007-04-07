@@ -19,16 +19,12 @@
 	\item Provide a simpler method of playlist generation than selecting individual tracks
 	\item Base playlist generation purely on analysis of audio data
 \end{itemize}
-\begin{itemize}
-	\item 
-\end 
 \subsection{Extensions}
 \begin{itemize}
 	\item Provide GUI
 	\item Run on portable devices
 \end{itemize}
 \section{Requirement Analysis}
-
 By looking at the core functionality of the application itself,
 I can set out more specific requirements about the software.
 \subsection{Software \& Library Requirements}
@@ -50,21 +46,21 @@ I can set out more specific requirements about the software.
 	\item libsndfile
 	\item FFTW3 (vs. hand coded - OMG)
 	\item libpopt (vs. hand coded - just lazy)
-\end
+\end{itemize}
 \subsection{Usability Requirements}
 \begin{itemize}
 	\item Interface
 	\begin{itemize}
 		\item commandline as its simplest to write
 		\item guis can easily be written to use the commandline tools in the background
-	\end
+	\end{itemize}
 	\item Storage
 	\begin{itemize}
 		\item Seperate files easier to code \& debug
 		\item Database slightly less reliable (moved files need to be recalculated) but much faster \& tidier
 		\item Data stored on each track needs to be small so as not to take too much disk space
 	\end{itemize}
-\end
+\end{itemize}
 % It should also include a description of how you have designed, built and evaluated your system.
 % The exact form of this will vary from project to project but it will usually occupy several chapters
 % and will often include sections on implementation and testing. Any software projects should included a 
