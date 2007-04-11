@@ -1,24 +1,38 @@
 \chapter{Review of Existing Systems (1500)}
+\section{Outline}
 \begin{itemize}
 	\item outline of the literature, theories and research in the area
-	\item critical review of how the literature describes and explains the issue
-	\item identification of key concepts and gaps in existing research
-	\item discussion of research questions
 \end{itemize}
-\section{Outline}
 Music Information Retrieval techniques are already in use in a number of commercial projects: Shazam! is a service where the user can play a short section of a song over the telephone, and it will identify and name the song from a massive database of popular tracks; MusicBrainz identifies digital music tracks against it’s massive database of metadata; sCrAmBlEd?HaCkZ! is a performance tool which matches the sounds from a live beatboxer to a database of audio/video fragments, playing matching sounds and video in sync with the beatboxer. While these systems provide a demonstration of the full range of applications of MIR, I will look specifically at playlist generation software, determining their weaknesses that I hope to build upon.
+\section{Concepts}
+\section{Software}
 \subsection{Ruffle}
 Ruffle is a plugin for the Linux audio player Muine, providing simple playlist generation based on the user’s listening habits and the genre specified in each track. When dealing with a large number of tracks and where a lot of data regarding frequently played tracks has been recorded, Ruffle works well to generate playlists based on a specifed start track or genre. Ruffle does fall down when dealing with music that is incorrectly labelled as it only infers similarity through tags on the audio such as artist, album or genre (a notoriously unreliable datasource), and from online services such as Last.fm, which do the same user habit recording but on a larger scale across all the users of the service.
-\subsection{Mood Bars}
-A new plugin for AmaroK, another Linux audio player called Moodbars has recently emerged, based on techniques explained in Wood and O'Keefe's paper, ``On Techniques for Content-Based Visual Annotation to Aid Intra-Track Music Navigation'' \citep{Wood2005}. The plugin generates coloured bars which serve to visually represent changes of mood within the track, in order to allow better inter-track navigation. While this is not directly related, the plugin does allow sorting tracks in a playlist according to these bars (by looking for the most predominant colour blocks) and hence sorting the tracks by similar ‘moods’. In practice, this only works well for short playlists containing already quite similar tracks --- In my testing, attempting to sort a playlist of songs where the genre and mood were quite mixed, the plugin was unable to generate a meaningful order for these.
 \subsection{Last.fm}
 Last.fm is an online service, whereby installing a plugin to the user's media player, the site tracks the listening habits of tens of thousands of users and aims for complete data capture, having actively maintained plugins for almost every media player application as well as some newer portable devices such as Apple's iPod. By tracking the play count, duration and time, the site provides suggestions to the user for new bands to hear, allows social networking by showing users with similar musical tastes, and provides weekly charts on ``what's hot''.
 \subsection{The Filter}
 The Filter is a soon to be released plugin for Apple's iTunes, this time providing interpolative playlist generation similar to what I hope to implement. By using statistical methods similar to Ruffle, it provides `smart' generation of playlists either by specifying key tracks, or by exploring a specified genre.
-\section{Review}
+\subsection{MoC: Master of Celebration}
+\subsection{iTunes Party Shuffle}
+\section{Literature}
+\begin{itemize}
+	\item critical review of how the literature describes and explains the issue
+\end{itemize}
+\begin{itemize}
+	\item \citet*{Aucouturier2002,Aucouturier2002a,Aucouturier2003}
+	\item \citet*{Logan2002}
+\end{itemize}
+\section{Review and Identification of Problem Areas}
+\begin{itemize}
+	\item identification of key concepts and gaps in existing research
+\end{itemize}
+\begin{itemize}
+	\item How did previous attempts manage?
+	\item Were they successful in achieving their objectives?
+	\item What existing techniques can I borrow or adapt?
+	\item Do I need to change my proposal?
+\end{itemize}
 Playlist generators based on statistical methods such as Ruffle and The Filter fall down on two areas: the fact that play counts for each track are their only source of data for statistical analysis, and the reliance on perfectly tagged audio for the recording of data. The Filter hopes to improve on Ruffle by correlating data between all its users, but still is unable to perform any playlist generation where the songs are completely untagged or `unseen' in its database. Additionally, these techniques rely on the user only listening to artists similar to each other, not accounting for users having wide tastes in music or even simply randomly listening to tracks from the whole library, as the order of tracks played is being recorded.
 
 My system, however, performs its playlist generation based completely on the actual audio data itself through feature extraction, completely independent of the metadata of the song or any gathered statistics on the user's listening habits. This is analogous to the separation between Data Mining and statistics --- while performing the same basic task, Data Mining techniques look at the implicit structures in the data such as high-dimensional trends, rather than the explicit counts and averages used in statistical methods. By having no reliance on the explicit structure (though I may, as an extension, use the play counts as an additional source of similarity data), my system is able to perform perfectly well on previously unseen songs or where little data has been collected about the user.
-\section{Concepts}
-\section{Problems / Gaps}
 

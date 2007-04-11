@@ -1,9 +1,9 @@
-\chapter{Method, Design, and Implementation (3500)}
+\chapter{Method, Design, and Implementation (2500)}
 \section{Overview}
 Talk about how this works (decode audio, extract features, measure similarity, interpolate) as a general overview
 \section{Theory \& Principles}
 Explain the theory behind all this (psychoacoustics, DSP, etc.)
-\subsection{Feature Extraction}
+\section{Feature Extraction}
 \begin{itemize}
 	\item go into depth about feature extraction, talk about each extractor, how it works and what it models/looks for
 \end{itemize}
@@ -12,23 +12,31 @@ Explain the theory behind all this (psychoacoustics, DSP, etc.)
 	\item Explain what this means, what these features show
 \end{itemize}
 \subsubsection{Zero Crossing Rate}
+\input{formulae/zero_crossing_rate}
 \subsubsection{First Order Autocorrelation}
+\input{formulae/first_order_autocorrelation}
 \subsection{Spectral Descriptors}
 \begin{itemize}
 	\item Explain what this means, what these features show
 \end{itemize}
 \subsubsection{Linear Regression}
+\input{formulae/linear_regression}
 \subsubsection{Centroid}
+\input{formulae/spectral_centroid}
 \subsubsection{Intensity}
+\input{formulae/spectral_intensity}
 \subsubsection{Smoothness}
+\input{formulae/spectral_smoothness}
 \subsubsection{Spread}
+\input{formulae/spectral_spread}
 \subsubsection{Dissymmetry}
-\subsection{Commentry(?)}
+\input{formulae/spectral_dissymmetry}
+\subsection{Commentary}
 \begin{itemize}
 	\item talk about reasons not to implement a shit tonne
 	\item other possible extractors - MFCC, others used in Marsyas
 \end{itemize}
-\subsection{Similarity Measure}
+\section{Similarity Measure}
 \begin{itemize}
 	\item problems of similarity measure
 	\begin{itemize}
@@ -44,9 +52,14 @@ Explain the theory behind all this (psychoacoustics, DSP, etc.)
 	\end{itemize}
 	\item feature weights - why have them, why train them
 \end{itemize}
-\subsection{Playlist Generation}
-user interface
-\subsection{Weight Optimisation}
+\section{Playlist Generation}
+\begin{itemize}
+	\item describe UI
+	\item how it works
+	\item ``a number of simple tools used in conjunction''
+	\item UNIX quote?
+\end{itemize}
+\section{Weight Optimisation}
 why have weights for the features, why train them
 \begin{itemize}
 	\item explain how the weight training works - listener testing app which plays three clips, the user selects which two are most similar
