@@ -4,13 +4,14 @@
 %                      JUSTIFY ALL MY CHOICES                      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-\newcommand{\objective}[1]{\begin{itemize}
-	\item \textbf{#1}
-\end{itemize}}
-\chapter{Specifications and Requirement Analysis (2000)}
+\newcommand{\objective}[1]{
+	\subsubsection{#1}
+}
+\chapter{Specifications and Requirement Analysis (2074/2000)}
 \section{Overview}
 % set out what my software has to do
 In order to investigate music similarity measure and its use in interpolative playlist generation, it is important for me to write a proof-of-concept piece of software which is capable of performing these functions, to show that the concepts discussed and my method proposed and designed are solid.
+
 \note{Why specify system behaviour}
 I have created a detailed specification of system behaviour in order to focus the development of this system. As stated in \citet{Bourque2004}, ``The Software Requirements Knowledge Area (KA) is concerned with the elicitation, analysis, specification, and validation of software requirements. It is widely acknowledged within the software industry that software engineering projects are critically vulnerable when these activities are performed poorly''. By specifying what is required of the software, and the requirements of the software itself, it becomes easier to design a system based around those goals, and hence have a more succinct design and implementation. Additionally, later comparing the final system back to these specifications allows me to both critique the system in terms of how well it met its goals, but also assess the viability of the system (or a future system based on the technique) for development into an end-user application.
 \section{System Objectives}
@@ -26,56 +27,63 @@ As I will need to process a large amount of audio files (the user's media librar
 \objective{Allow components to be added and modified without (severely) affecting the operation of others}
 % Encapsulation / Abstraction
 Seperating the concerns of similarity measure (audio processing and analysis) and playlist generation (statistical analysis) into seperate programs means that the code itself will be simpler and clearer, which in turn means that it is easier to understand, develop, and test. As I will be modifying the algorithm with which the similarity measure and playlist generation works, it is important that the two do not depend on each other more than necessary. Following the Object-Oriented design philiosophy, and it's ideas of abstraction and encapsulation, I have written the software in C++, and seperated the program logic into seperate classes, each dealing only with their own data and processing.
-\objective{Something else?}
 \subsection{User Requirements}
 In addition to the requirements for me as the developer and researcher, it is important to consider the needs of the hypothetical end-user, who would use a system based upon the technique later discussed. By setting out the requirements for a viable playlist generating application, I can design my system and technique around this. The following are a set of base-line requirements for a feasable playlist generation system.
 \objective{Analyse the user's media library in a reasonable time-frame}
 Digital signal processing and audio analysis such as required by any audio-based similarity measure requires a great deal of data processing - audio must be read from disk byte-by-byte and calculations performed based on this - if a typical song (uncompressed) is 20MB, this translates to 5,242,880 floating-point additions and a division just to calculate the mean value! As the processing done on each song is immense, it is important to have this processing run as quick as possible, and avoid the need to re-process any one song.
 
-To achieve the kind of speed needed, C++ is a good choice of language as it is known to be one of the fastest programming languages. 
+To achieve the kind of speed needed, C++ is a good choice of language as it is a very low-overhead, high speed language. As the amount of calculation required is unavoidable, I will attempt to avoid the need to re-calculate data for a file by storing the analysed data along with the audio files themselves; this means that if files are moved, the analysis data is moved with them.
 \objective{Avoid storing too much data}
-Slow, uses lots of disk space etc.
+\label{text:spec:requirement:data}
+If too much data for each song is stored it affects the scalability of the application, as for large media libraries the analysis data itself will take up a large amount of disk space. Additionally, the more data stored, the more calculation needed to compute similarity, increasing the time taken to generate playlists exponentially.
 \objective{Provide a simpler method of playlist generation than selecting individual tracks}
+Playlist interpolation easier to select yadda yadda 
 \objective{Base playlist generation solely on analysis of audio data}
-relate to problems found in review
+relate to problems with other software found in review
 \subsection{Extensions}
-\begin{itemize}
-	\item Provide GUI
-	\item Run on portable devices
-\end{itemize}
-What my system has to achieve for the purposes of this project, discussion of research questions
-\note{Relate back to software review}
-User requirements
+\objective{Provide a GUI for ease of use}
+\objective{Provide a version which can run on portable devices (MP3 players, etc.)}
 % The system which I have designed and created is a small demonstration system, tailored for ease and speed of development as development time is limited, verifiability of results to ensure correct operation of the system, and ease of testing outputs to assess the overall performance of the system.
 \section{Requirement Analysis}
-By looking at the core functionality of the application itself,
-I can set out more specific requirements about the software.
-\subsection{Software \& Library Requirements}
-\begin{itemize}
-	\item Give background on libraries used and what they are used for
-	\item Give alternatives to some libraries and explain why they wern't used (Marsyas and MAAATE)
+In addition to analysing what is required of the system, it is important to look at what will be required by the system itself. After looking at the requirements and functionality set out above, I have set out a list of software requirements of the system.
+\subsection{Operating System}
+Quick note about writing for linux as it's easier? Code kept very portable, relying on libraries helps this.
+\subsection{Software Libraries}
+Throughout the development of the system, I have made extensive use of software libraries where possible to speed development time and reduce errors. As there are many software libraries available to aid in any individual task, I have evaluated several options and give reasons for each choice.
+\subsubsection{Audio Decoding}
+Digital audio, when converted to analog for playback or processed in some way is read as a continuous stream of floating-point numbers between 1 and -1, representing the current level of the waveform. When stored on disk, however, there are hundreds of file formats, each with a different set of features and an entirely different algorithm for obtaining the floating-point numbers needed for processing. In a typical user's media library, there can be audio of very different types: MP3 for portable devices, AAC on Apple machines, WMA on Windows, FLAC for lossless compression, WAV for uncompressed audio; it is important that any signal analysis system is able to process at least these types in order to not be unusable. For the purposes of this proof-of-concept code, I began by using \software{libsndfile}[REF], which can read uncompressed audio files (such as WAV and AIFF). While this was suitable for development work, it quickly became evident that if a large number of audio files were to be processed, I would need to be able to decode compressed audio (mainly MP3 and FLAC in my test corpus). Due to this, I used the \software{GStreamer} multimedia framework to decompress, downsample and mix audio to mono (\coderef{SoundFile.cc}{21}) into a temporary WAV file, ready to be read in by libsndfile (\coderef{SoundFile.cc}{29}). While this provides a simple solution to the problem, it is not optimal as it induces the large overhead of spawning another process and writing to a temporary file; again a trade-off with development time and optimality, I could have directly implemented reading from the major formats using their individual libraries, gaining processing speed and reducing overhead.
+\subsubsection{Audio Analysis / DSP}
+For the audio analysis section of the system, it was possible to use a number of software libraries to implement the signal processing and analysis. \software{Marsays}[REF], \software{MAAATE}[REF] and \software{libaudiofeat}[REF] are three libraries which allow the developer to pass in audio data and receive analysis data. Although this would have avoided the need to directly implement feature extractors (discussed later), it would mean sacrificing both speed in unneeded calculations (\software{libaudiofeat}) and flexibility in the feature extractors (\software{Marsyas} and \software{MAAATE}) which I could use. Also, as these were large and complex libraries, it would have taken me as long to learn how to use the library as it would write the code myself; due to this, I decided to manually implement and test the feature extractors.
+The feature extraction process required the computation of a Fourier Transform. As this is a complex mathematical procedure I used the \software{FFTW3} library to perform the computation, as it is a highly optimised library specifically for doing Fourier Transforms.
+\subsubsection{User Interface}
+As discussed previously, I opted to implement a command-line interface. In order to parse the options specified on the commandline, and provide a unified interface to the user, I used the \software{libpopt} library to parse command-line options. Although this could have been implemented manually, much of the code of libpopt would need to be duplicated and would provide no real benefit.
+\begin{comment}
 	\begin{itemize}
-		\item lack of knowledge of libraries - would have taken as long to learn it as to have written it myself
-		\item too big to leverage into the proof-of-concept example needed
-		\item wouldn't allow as much flexibility in operation of the program
-		\item this way is easier to modify in future to add more extractors / build on in any way
-		\item why they would have been good
+		\item Give background on libraries used and what they are used for
+		\item Give alternatives to some libraries and explain why they wern't used (Marsyas and MAAATE)
 		\begin{itemize}
-			\item easier to chop and change between features (not important for my project)
-			\item ?
+			\item lack of knowledge of libraries - would have taken as long to learn it as to have written it myself
+			\item too big to leverage into the proof-of-concept example needed
+			\item wouldn't allow as much flexibility in operation of the program
+			\item this way is easier to modify in future to add more extractors / build on in any way
+			\item why they would have been good
+			\begin{itemize}
+				\item easier to chop and change between features (not important for my project)
+				\item ?
+			\end{itemize}
 		\end{itemize}
+		\item GStreamer (vs. libmad, libogg/vorbis, libflac; directsound)
+		\item libsndfile
+		\item FFTW3 (vs. hand coded - OMG)
+		\item libpopt (vs. hand coded - just lazy)
 	\end{itemize}
-	\item GStreamer (vs. libmad, libogg/vorbis, libflac; directsound)
-	\item libsndfile
-	\item FFTW3 (vs. hand coded - OMG)
-	\item libpopt (vs. hand coded - just lazy)
-\end{itemize}
-\subsection{Usability Requirements}
+\end{comment}
+\subsection{Hardware \& Storage}
 \begin{itemize}
-	\item Interface
+	\item Hardware
 	\begin{itemize}
-		\item commandline as its simplest to write
-		\item guis can easily be written to use the commandline tools in the background
+		\item Fast processor
+		\item Lots of HDD space for music itself, not much on top of that
 	\end{itemize}
 	\item Storage
 	\begin{itemize}

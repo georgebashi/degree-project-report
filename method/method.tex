@@ -1,30 +1,33 @@
 \chapter{Method, Design, and Implementation (2500)}
-\section{Overview}
-Talk about how this works (decode audio, extract features, measure similarity, interpolate) as a general overview
 \section{Theory \& Principles}
 Explain the theory behind all this (psychoacoustics, DSP, etc.)
+\section{System Overview}
+% Talk about how this works (decode audio, extract features, measure similarity, interpolate) as a general overview
 \section{Feature Extraction}
 \begin{itemize}
 	\item go into depth about feature extraction, talk about each extractor, how it works and what it models/looks for
 \end{itemize}
+\subsection{Standardized Moments}
+For each feature extracted, I calculate the mean, variance, skewness and kurtosis over each three second block. It is these four values that are then used in the similarity measure, as it is unneccesary to store the output of each feature extractor for each window (and the amount of data would exceed what I set out in the specification, page \pageref{text:spec:requirement:data}). These values show how each feature for each window changes over the course of a block: variance describes how much the values change; skewness, how asymmetrical the data set is; and kurtosis, the `peakedness' or `flatness' of the data set \citep{Siegrist2007}.
 \subsection{Signal Descriptors}
-\begin{itemize}
-	\item Explain what this means, what these features show
-\end{itemize}
+Signal descriptors are values which are calculated from the values of the signal itself. They tend to be values based on the periodicity or short-time amplitude of the signal. They are simple aggregate functions, and as of such are much less computationally expensive than the spectral descriptors.
 \subsubsection{Zero Crossing Rate}
 \input{formulae/zero_crossing_rate}
+The zero crossing rate is the number of times the signal passes from positive to negative or vice versa; it can be used as primitive pitch detection algorithm, and has been used successfully in the classification of percussive sounds \citep{Gouyon2000} and speech recognition[REF], due to the fact that it tends to be higher and unstable during the attack period of a sound \citep{Schwarz2004}.
 \subsubsection{First Order Autocorrelation}
 \input{formulae/first_order_autocorrelation}
+Autocorrelation is a measure of how well the signal matches a time-shifted version of itself, and hence shows the `noisyness' of the signal. \citep{Wikipedia2007}. As with zero crossing rate, this is useful to find attacks as well as being a measure of the harshness of the timbre of the sound.
 \subsection{Spectral Descriptors}
-\begin{itemize}
-	\item Explain what this means, what these features show
-\end{itemize}
+Spectral descriptors use Fourier series (the output of a discrete Fourier transform); rather than working in the dimensions of amplitude and time, they output values from the dimensions of frequency and amplitude. Figure [REF] shows the data analysed for one block of audio for both the spectral and signal descriptors. Spectral descriptors, working in the frequency domain, aim to represent features of the timbre of the sound, with the higher statistical moments looking at the change in timbre over blocks.
 \subsubsection{Linear Regression}
 \input{formulae/linear_regression}
+Linear regression finds the `line of best fit' through a set of data. I have used this statistical ??? to find the gradient ($\beta$) of the spectrum, which is a measure of the ratio of high-frequency to low-frequency component of the sound, and hence the timbre. With this feature the variance will most likely be a valuable similarity measure, as it will show the smoothness of timbre - long sustained notes will have low variation in linear regression, fast or noisy music will have a large variance.
 \subsubsection{Centroid}
 \input{formulae/spectral_centroid}
+The spectral centroid is like the centre of gravity of a set of data if it were imagined to be a 2D shape \citep{Park2004}; it represents the average frequency weighted by amplitude, and hence where most of the energy of the signal lies. Psychoacoustically it is a measure of the perceived `brightness' of the sound, providing a better estimation of a `bright' sound than pitch \citep{Schubert2004}, and tending to rise for more intense sounds.
 \subsubsection{Intensity}
 \input{formulae/spectral_intensity}
+Intensity gives a measure of the total amplitude in each window, giving an approximation of the perceived `loudness' of the sound. 
 \subsubsection{Smoothness}
 \input{formulae/spectral_smoothness}
 \subsubsection{Spread}
@@ -32,8 +35,9 @@ Explain the theory behind all this (psychoacoustics, DSP, etc.)
 \subsubsection{Dissymmetry}
 \input{formulae/spectral_dissymmetry}
 \subsection{Commentary}
+
 \begin{itemize}
-	\item talk about reasons not to implement a shit tonne
+	\item talk about reasons not to implement a tonne
 	\item other possible extractors - MFCC, others used in Marsyas
 \end{itemize}
 \section{Similarity Measure}
