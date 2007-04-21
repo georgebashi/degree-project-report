@@ -10,15 +10,19 @@
 \usepackage{verbatim}
 \usepackage[latin1]{inputenc}
 \usepackage{url}
+\usepackage{subfigure}
 
 \bibliographystyle{plainnat}
 \bibpunct{(}{)}{;}{a}{,}{,}
 
-\newcommand{\coderef}[2]{\texttt{#1:#2}, page \pageref{code:#1}}
+\newcommand{\coderef}[2]{\texttt{#1:#2}}
+\newcommand{\codepageref}[2]{\texttt{#1:#2}, page \pageref{code:#1}}
 \newcommand{\software}[1]{\texttt{#1}}
 \newcommand{\note}[1]{\begin{itemize}
 	\item \textcolor{blue}{#1}
 \end{itemize}}
+\definecolor{MyDarkBlue}{rgb}{0.15,0.25,0.55}
+\newcommand{\executable}[1]{\texttt{\textcolor{MyDarkBlue}{#1}}}
 
 \title{Interpolative Playlist Generation}
 \author{Jamil George Bashi (92432)\\

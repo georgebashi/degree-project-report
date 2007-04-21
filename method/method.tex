@@ -1,70 +1,120 @@
-\chapter{Method, Design, and Implementation (2500)}
-\section{Theory \& Principles}
-Explain the theory behind all this (psychoacoustics, DSP, etc.)
-\section{System Overview}
+\chapter{Method, Design, and Implementation (2515/2500)}
+\section{Overview, Theory \& Principles}
 % Talk about how this works (decode audio, extract features, measure similarity, interpolate) as a general overview
+The system I have designed provides interpolative playlist generation based on sets of data calculated about each song in the user's media library. The process begins by running the \executable{extractor} program on each of the files in the media library, which begins the process of extracting data about each song known as \emph{features}. These features, calculated from the audio data itself, aim to be an absolute measure of the sound (or \emph{timbre}) of the audio, by using statistical functions to gain values based on psychoacoustics. That is to say, ideally, the extracted features become an absolute measure of the timbre of the song, such that two songs with similar features will sound similar. Once these features have been extracted and stored, the \executable{generator} program reads the stored feature vectors into memory and generates a playlist by measuring the distance between the feature vectors, hence giving the \emph{similarity} between songs.
+
+When measuring the similarity between songs, \executable{generator} biases the distance between songs according to a set of \emph{feature weights}, which are a measure of how important each of the features are towards an overall accurate similarity metric. The weights themselves are `trained' by analysing the output of a quiz (\executable{listenertest.rb}), asking the user of the system to pick the two most similar from three clips of songs from the library, a technique suggested by \citet*{Novello2006}. This both allows the system to train itself as to which features are important, but also later assess its own output (with the \executable{assess.rb} program) based on how well the similarity metric matches up with the answers given in the quiz.
+
+Interpolative playlist generation involves the user inputting a set of \emph{key songs} and an amount of tracks to add. The system then, using the similarity measure, `fills the gaps' with tracks creating a smooth musical transition (in genre) between the keys. For example, if asked to interpolate one song between a blues and a hip-hop track it may pick a rhythm-and-blues track, in order to create as smooth a transition as possible. As well as selecting the `best' tracks to create the playlist, the generator also obeys rules of good playlist writing, such as not having songs by the same artist close to each other in the playlist (to add variety to the playlist).
+
+I will now detail the workings of each part of the system designed, and the lower-level workings of each section.
+\begin{figure}[ht]
+	\caption{Key to mathematical symbols}
+	\begin{tabular}{l l}
+		$\oplus$		& The exclusive OR operator \\
+		$a$				& The vector containing amplitudes for each bin returned from the FFT \\
+		$A$				& The vector of feature blocks for song $A$ \\
+		$A'$			& The vector of sorted blocks in song $A$ \\
+		$f$				& The feature vector for each block \\
+		$f_n^{A_{i}}$	& The feature $n$ of song $A$, block $i$ \\
+		$F$				& The vector containing frequencies of each bin of $a$ \\
+		$g_{i,j}(A,B)$	& The distance between block $i$ of song $A$ and block $j$ of song $B$ \\
+		$g_{s,s}$		& The distance between the song feature vectors of song $A$ and song $B$ \\
+		$N_B$			& The number of bins returned by the FFT \\
+		$N_F$			& The number of features in the vector \\
+		$N_G$			& The number of blocks in song $A$ or $B$ (whichever is less) \\
+		$N_S$			& The number of samples in one window \\
+		$s$				& The vector containing signal data for one window \\
+		$sgn()$			& Function returning 1 if positive, 0 if negative \\
+		$w$				& The feature weights vector \\
+		$W_S$			& The weight for the song block \\
+		$W_B$			& The overall weight for the song blocks \\
+		$v_i(A)$		& Sorting value for block $i$ of song $A$ \\
+	\end{tabular}
+\end{figure}
 \section{Feature Extraction}
-\begin{itemize}
-	\item go into depth about feature extraction, talk about each extractor, how it works and what it models/looks for
-\end{itemize}
-\subsection{Standardized Moments}
-For each feature extracted, I calculate the mean, variance, skewness and kurtosis over each three second block. It is these four values that are then used in the similarity measure, as it is unneccesary to store the output of each feature extractor for each window (and the amount of data would exceed what I set out in the specification, page \pageref{text:spec:requirement:data}). These values show how each feature for each window changes over the course of a block: variance describes how much the values change; skewness, how asymmetrical the data set is; and kurtosis, the `peakedness' or `flatness' of the data set \citep{Siegrist2007}.
+% the point of all these is that they each represent part of the sound of a song so that once you've got all the values out you have a measure of what it sounds like to your brain so a song that produces similar values by this measure are similar songs
+When analysing an audio file to extract features, the system must first decode the compressed audio. This is performed by calling the external \software{gst-launch} program provided by \software{GStreamer} (\codepageref{SoundFile.cc}{21}) to decode to a temporary file, which is then read in using \software{libsndfile} (\coderef{SoundFile.cc}{45}); once the file has been fully processed, the temporary file is removed (\coderef{SoundFile.cc}{39}).
+
+The audio file is read in 1024-sample (0.02 second) \emph{windows}, which are then passed to \software{FFTW3} (\codepageref{FFT.cc}{44}) to perform the Fourier transform. These two sets of data for each window are then passed to the relevant feature extractors, which return their features for each window (\codepageref{Features.cc}{94}). The features for each window, held by the \executable{FeatureSet} class, are then grouped into 150-window (3.5 second) blocks (\executable{FeatureGroup}s), where their mean, variance, skewness and kurtosis are calculated (\coderef{Features.cc}{29}). The reason for grouping the windows into these blocks is two-fold: first, it provides a two-tiered feature vector to the similarity measure, as all windows are processed into one song-level block at the end of processing (\codepageref{extractor.cc}{119}), which can provide a rough but much less computationally expensive similarity measure; second, it cuts down on the amount of data stored for each track (and hence helps meet the requirement of not storing too much data) while still providing information on the change in features over the track, and allows the standardised moments to be easily calculated.
+\begin{figure}[h]
+	\centering
+	\caption{A processing block from the beginning of \emph{Quick and to the Pointless} by \emph{Queens of the Stone Age}: It begins with ``Yeah yeah yeah yeah!'', the fourth ``yeah'' being overlaid with the entry of the guitar, with three claps towards the end.}
+	\subfigure[Waveform (the signal read from the audio file)]{\label{fig:method:block:waveform}\includegraphics[width=0.5\textwidth]{method/waveform}}
+	\subfigure[Spectrogram (a graphic representation of the spectrum returned by \software{FFTW3})]{\label{fig:method:block:spectrogram}\includegraphics[width=0.5\textwidth]{method/spectrogram}}
+	\label{fig:method:block}
+\end{figure}
+\subsection{Standardised Moments}
+For each feature extracted the mean, variance, skewness and kurtosis over each three second block are calculated. It is these four values that are then used in the similarity measure, as it is unnecessary to store the output of each feature extractor for each window (and the amount of data would exceed what was set out in the specification, page \pageref{text:spec:requirement:data}). These values show how each feature for each window changes over the course of a block: variance describes how much the values change; skewness, how asymmetrical the data set is; and kurtosis, the `peakedness' or `flatness' of the data set \citep{Siegrist2007}.
 \subsection{Signal Descriptors}
-Signal descriptors are values which are calculated from the values of the signal itself. They tend to be values based on the periodicity or short-time amplitude of the signal. They are simple aggregate functions, and as of such are much less computationally expensive than the spectral descriptors.
+Signal descriptors are values which are calculated from the values of the signal itself. They are simple aggregate functions, and as of such are much less computationally expensive than the spectral descriptors, and tend to be values based on the periodicity or short-time amplitude of the signal. As is shown by figure \ref{fig:method:block:waveform}, it is easy to see the changes in amplitude, shape and periodicity as a whole from the waveform, but discerning polyphonic events is difficult (the fourth ``yeah!'' is almost completely obscured by the entry of the guitar).
 \subsubsection{Zero Crossing Rate}
 \input{formulae/zero_crossing_rate}
 The zero crossing rate is the number of times the signal passes from positive to negative or vice versa; it can be used as primitive pitch detection algorithm, and has been used successfully in the classification of percussive sounds \citep{Gouyon2000} and speech recognition[REF], due to the fact that it tends to be higher and unstable during the attack period of a sound \citep{Schwarz2004}.
 \subsubsection{First Order Autocorrelation}
 \input{formulae/first_order_autocorrelation}
-Autocorrelation is a measure of how well the signal matches a time-shifted version of itself, and hence shows the `noisyness' of the signal. \citep{Wikipedia2007}. As with zero crossing rate, this is useful to find attacks as well as being a measure of the harshness of the timbre of the sound.
+Autocorrelation is a measure of how well the signal matches a time-shifted version of itself, and hence shows the `noisiness' of the signal. \citep{Wikipedia2007}. As with zero crossing rate, this is useful to find attacks as well as being a measure of the harshness of the timbre of the sound.
+\subsubsection{Energy}
+\input{formulae/energy}
+Energy gives a linear measure of the total amplitude in each window, giving an approximation of the perceived `loudness' of the sound. This will be useful for determining the level of change in energy per block, and hence be a measure of the distinctiveness of beats.
 \subsection{Spectral Descriptors}
-Spectral descriptors use Fourier series (the output of a discrete Fourier transform); rather than working in the dimensions of amplitude and time, they output values from the dimensions of frequency and amplitude. Figure [REF] shows the data analysed for one block of audio for both the spectral and signal descriptors. Spectral descriptors, working in the frequency domain, aim to represent features of the timbre of the sound, with the higher statistical moments looking at the change in timbre over blocks.
+Spectral descriptors use Fourier series (the output of a discrete Fourier transform); rather than working in the dimensions of amplitude and time, they output values from the dimensions of frequency and amplitude. Figure \ref{fig:method:block}, \vpageref{fig:method:block}, shows the data analysed for one block of audio for both the spectral and signal descriptors. Spectral descriptors, working in the frequency domain, aim to represent features of the timbre of the sound, with the higher statistical moments looking at the change in timbre over blocks.
 \subsubsection{Linear Regression}
 \input{formulae/linear_regression}
-Linear regression finds the `line of best fit' through a set of data. I have used this statistical ??? to find the gradient ($\beta$) of the spectrum, which is a measure of the ratio of high-frequency to low-frequency component of the sound, and hence the timbre. With this feature the variance will most likely be a valuable similarity measure, as it will show the smoothness of timbre - long sustained notes will have low variation in linear regression, fast or noisy music will have a large variance.
+Linear regression finds the `line of best fit' through a set of data. I have used this statistical approximation to find the gradient ($\beta$) of the spectrum, which is a measure of the ratio of high-frequency to low-frequency component of the sound, and hence the timbre. With this feature the variance will most likely be a valuable similarity measure, as it will show the smoothness of timbre - long sustained notes will have low variation in linear regression, fast or noisy music will have a large variance.
 \subsubsection{Centroid}
 \input{formulae/spectral_centroid}
-The spectral centroid is like the centre of gravity of a set of data if it were imagined to be a 2D shape \citep{Park2004}; it represents the average frequency weighted by amplitude, and hence where most of the energy of the signal lies. Psychoacoustically it is a measure of the perceived `brightness' of the sound, providing a better estimation of a `bright' sound than pitch \citep{Schubert2004}, and tending to rise for more intense sounds.
-\subsubsection{Intensity}
-\input{formulae/spectral_intensity}
-Intensity gives a measure of the total amplitude in each window, giving an approximation of the perceived `loudness' of the sound. 
+The spectral centroid is analogous to the centre of gravity of a set of data if it were imagined to be a 2D shape \citep{Park2004}; it represents the average frequency weighted by amplitude, and hence where most of the energy of the signal lies. Psychoacoustically it is a measure of the perceived `brightness' of the sound, providing a better estimation of a `bright' sound than pitch \citep{Schubert2004}, and tending to rise for more intense sounds. This feature will represent the timbre of each block as a whole, and provide information on the change in timbre through the song.
 \subsubsection{Smoothness}
 \input{formulae/spectral_smoothness}
+Smoothness, also known as flatness, can be used to obtain a measure of the spectral envelope (the change in spectrum over time) of a sound \citep{Klapuri2003}. It is a measure of how spread out the signal is across the spectrum --- white noise, which has power at all frequencies, would have a smoothness of around 1; a sine wave, on the other hand, would have a smoothness of 0, as it is a single spike in the spectrum \citep{Peeters2004}. Using this, the smoothness will give a good measure of the noisiness and harmonicity of the signal.
 \subsubsection{Spread}
 \input{formulae/spectral_spread}
+Spectral spread describes the variance of the signal about its spectral centroid \citep{Peeters2004}, and hence the perceptual `width' of the timbre.
 \subsubsection{Dissymmetry}
 \input{formulae/spectral_dissymmetry}
+Dissymmetry (or skewness) is a measure of how skewed the spectrum is about the spectral centroid, and hence the tilt towards high or low frequencies about the spectral centroid.
 \subsection{Commentary}
-
 \begin{itemize}
 	\item talk about reasons not to implement a tonne
 	\item other possible extractors - MFCC, others used in Marsyas
 \end{itemize}
 \section{Similarity Measure}
-\begin{itemize}
-	\item problems of similarity measure
-	\begin{itemize}
-		\item having to normalise the vectors
-		\item choices of algorithm for how to compare tracks - how does order of comparison affect results in similarity measure?
-		\begin{itemize}
-			\item 3sec blocks give bias to songs with beat aligned to block boundary (combatted by overall song features) - compare blocks in neighbouring groups to beat this
-			\item structure (verse/chorus, intro, delay at start) will strongly affect a simple ordered comparison
-			\item sorted \& total comparisons give `complete' comparison of track, though take O(n!) time to complete
-			\item ``as of such I have implemented four techniques and will see which is best'' (har har)
-		\end{itemize}
-		\item NaN problems
-	\end{itemize}
-	\item feature weights - why have them, why train them
-\end{itemize}
+\label{text:method:similarity_measure}
+The similarity measure, performed by \executable{generator} (in \codepageref{Song.cc}{162} and \codepageref{Features.cc}{46}), works on the features stored by \executable{extractor}. When \executable{generator} is run, it begins by loading the analysis files / feature vectors for each of the songs in the media library (\codepageref{SongSet.cc}{21}). These are then normalised into the range 0--1, in order to avoid any feature having bias over others due to its values being larger (the difference between two centroids could be several thousand; when added to the distance between two linear regressions which are -1 to 1, the centroid would have much more effect on the similarity than the regression). When \executable{generator} is run with the \texttt{-s} command-line option, it performs a similarity measure against a specified track and every other track in the database, returning the top $n$ matches, so that the similarity measure can be tested alone from the playlist generation.
+
+To compute the similarity between two songs, \executable{generator} computes the difference between two feature blocks using the following equation:
+\input{formulae/feature_block_distance}
+\begin{center}
+	\small \textit{(where $i$ and $j$ are $s$ for the song blocks of song $A$ and $B$)}
+\end{center}
+That is, the total of the absolute value of each feature subtracted from the corresponding feature in the second block, multiplied by the corresponding weight.
+
+As the feature blocks extracted from the audio are sequential three-second clips, the similarity measure is very dependant on both the tempo of the music and the order of the blocks when compared to another song. If the beats happen to fall at the same rate as the blocks are extracted (roughly 69 or 138bpm, the energy measure will be inflated and not match the `true' timbre. Likewise, the structure of the song will affect the features extracted as the timbre of the verse will be substantially different from the chorus (for example), therefore putting more emphasis on the order of comparisons. This has been ??? in two ways: first, the overall song feature block is the average timbre of the entire track, and hence is not affected by the structure of the song; second, four different methods of comparing the feature blocks have been implemented and evaluated, each with their own advantages for the overall similarity metric.
+
+\subsubsection{Ordered Comparison}
+\input{formulae/song_distance_ordered}
+The first algorithm implemented was the simple ordered comparison: block 1 in song 1 is compared to block 1 in song 2, block 2 to 2 and so on. This similarity measure will be strongly affected by the structure of the two tracks: if the same song is compared to one with three seconds of silence at the beginning, it will return a similarity much lower than it should. However, by being so reliant on structure, it will rank similar-structured songs as more similar, therefore possibly working better for already-similar tracks such as a set of tracks from the same album.
+\subsubsection{Ordered Area Comparison}
+\input{formulae/song_distance_ordered_area}
+The area comparison hopes to improve on the ordered comparison (\ref{eq:song_distance_ordered}) by additionally comparing the previous and next block from song B with song A, thereby comparing each block from song A with a nine second area in song B. Comparing songs in this way means that the comparison still takes structure into account, but is less reliant on the structural changes happening at the same time in two tracks for a low similarity measure. Additionally, by comparing three groups at once, the problems with the timings of the song aligning with the block boundaries are alleviated.
+\subsubsection{Exhaustive Comparison}
+\input{formulae/song_distance_exhaustive}
+Exhaustive comparison aims to get a `complete' comparison of the two tracks, by comparing each block from song A to each in song B, and hence is not affected by the structure of the song in any way. This is also the only comparison which takes the whole of both songs into account, regardless of length. This means that it will provide much better results than the other comparisons in the case of songs $A$ and $B$ having greatly different length, but will be the slowest of all comparisons to compute.
+\subsubsection{Sorted Block Comparison}
+In the sorted block comparison, the feature blocks from both songs are both sorted according to the sum of their normalised features:
+\input{formulae/feature_block_sorting_value}
+The songs are then compared in the same way as the ordered comparison:
+\input{formulae/song_distance_sorted}
+This approach is similar to the exhaustive comparison in that it is unaffected by structure, but provides a rough (and hence much less expensive) comparison between already similar blocks in the two songs (as they have been sorted by their total), meaning it will be focusing on much smaller differences between features, and hence work best for finding very similar tracks even if the structure is disparate.
+\subsection{Commentary}
 \section{Playlist Generation}
-\begin{itemize}
-	\item describe UI
-	\item how it works
-	\item ``a number of simple tools used in conjunction''
-	\item UNIX quote?
-\end{itemize}
+\executable{generator}, when run in playlist generation mode, is supplied with a list of key songs and a number of tracks to add between. Once the feature vectors have been loaded and normalised (see page \ref{text:method:similarity_measure}), the playlist generator creates a new empty playlist of the correct length, with the key tracks in position (stored as an array of \executable{PlaylistEntry}s, \codepageref{Playlist.cc}{60}). The \executable{PlaylistEntry}s hold arrays of tracks, sorted in descending order of their similarity to the `ideal' track for that position in the playlist, created by interpolating between the song feature block of the two neighbouring key tracks (\coderef{Playlist.cc}{28}). At this stage, the playlist holds the closest matches to the ideal tracks, ie.\ the `best' playlist. To avoid repetition of artist (and hence improve the ???[REF]), the playlist generator then groups together tracks by the same artist between the same two key songs (\coderef{Playlist.cc}{112}), and scores them based on how similar they are to their ideal track for that position in the playlist (\coderef{Playlist.cc}{33}). The track which is best for that position in the playlist is kept, and the others are resorted with the artist in question removed. This process is repeated until no tracks remain with the same artist, when the playlist is outputted as a list of files relative to the media library folder (the M3U format).
+
+The similarity measure used when sorting the tracks based on their similarity to the ideal track works solely on the song features, in order to cut down on the processing required to generate a playlist. If the playlist generator were to sort using the similarity to a set of interpolated feature blocks, each song in the media library would have to be compared multiple times to the `ideal' feature blocks, and it would be very computationally expensive. When calculating the score of each track (when removing artists), the feature blocks are taken into account to obtain a better similarity metric, and an weight added to the song features ($W_S$) and feature blocks ($W_B$) to bias the scores so they are not too dissimilar between the two similarity metrics.
 \section{Weight Optimisation}
-why have weights for the features, why train them
+\note{why have weights for the features, why train them}
+
 \begin{itemize}
 	\item explain how the weight training works - listener testing app which plays three clips, the user selects which two are most similar
 	\item why this helps us
@@ -72,13 +122,13 @@ why have weights for the features, why train them
 	\item other ways of collecting similar data
 	\begin{itemize}
 		\item tracks off the same album most likely similar - especially in the case of a compilation album
-		\item last.fm and other services ``similar songs'' based on statistics can be used as a guide to the training on which songs are simliar
+		\item last.fm and other services ``similar songs'' based on statistics can be used as a guide to the training on which songs are similar
 	\end{itemize}
 \end{itemize}
 \begin{itemize}
 	\item system can discover important features for itself
-	\item as it is not completely understood how we percieve sound, feature extractors only work as a basic model, therefore it is best to use lots of these models and let empirical evidence from testing `teach' the system the best models to use
-	\item weights will help the system return results similar to the results given by the user - the perfect system would take the data learned from the user in the testing app and return identical results - we can test how similar the results of our system is to the user's output for a good measure of the efficacy of the system
+	\item as it is not completely understood how we perceive sound, feature extractors only work as a basic model, therefore it is best to use lots of these models and let empirical evidence from testing `teach' the system the best models to use
+	\item weights will help the system return results similar to the results given by the user - the perfect system would take the data learnt from the user in the testing app and return identical results - we can test how similar the results of our system is to the user's output for a good measure of the efficacy of the system
 \end{itemize}
 \section{Implementation}
 issues with implementation
@@ -89,7 +139,8 @@ issues with implementation
 		\item it is possible to precalcuate all distances between songs - size/speed tradeoff - take up more space on portable device but trivial to generate playlists on-the-go
 	\end{itemize}
 \end{itemize}
-\section{Critique (of Design)}
+\section{Critique (of Design and Implementation)}
+\note{how does changing block size affect similarity measure}
 \begin{itemize}
 	\item features of the selected paradigm and justification
 	\item advantages and disadvantages of my implementation / approach

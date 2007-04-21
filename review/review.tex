@@ -1,9 +1,10 @@
 \chapter{Review of Existing Systems (630/1500)}
 \section{Outline}
-\begin{itemize}
-	\item outline of the literature, theories and research in the area
-\end{itemize}
-Music Information Retrieval techniques are already in use in a number of commercial projects: Shazam! is a service where the user can play a short section of a song over the telephone, and it will identify and name the song from a massive database of popular tracks; MusicBrainz identifies digital music tracks against its massive database of metadata; sCrAmBlEd?HaCkZ! is a performance tool which matches the sounds from a live beatboxer to a database of audio/video fragments, playing matching sounds and video in sync with the beatboxer. While these systems provide a demonstration of the full range of applications of MIR, I will look specifically at playlist generation software, determining their weaknesses that I hope to improve upon.
+\note{outline of the literature, theories and research in the area}
+Music Information Retrieval (MIR) is a relatively young topic \citep{Fingerhut2004}, involving the study of 
+
+
+Music Information Retrieval techniques are already in use in a number of commercial projects: Shazam! is a service where the user can play a short section of a song over a telephone, and it will identify and name the song from a massive database of popular tracks; MusicBrainz identifies digital music tracks against its massive database of metadata; sCrAmBlEd?HaCkZ! is a performance tool which matches the sounds from a live beatboxer to a database of audio/video fragments, playing matching sounds and video in sync with the beatboxer. While these systems provide a demonstration of the full range of applications of MIR, I will look specifically at playlist generation software, determining their weaknesses that my system will aim to improve upon.
 \section{Concepts}
 \section{Software}
 \subsection{Ruffle}
@@ -11,21 +12,17 @@ Ruffle is a plugin for the Linux audio player Muine, providing simple playlist g
 \subsection{Last.fm}
 Last.fm is an online service, whereby installing a plugin to the user's media player, the site tracks the listening habits of tens of thousands of users and aims for complete data capture, having actively maintained plugins for almost every media player application as well as some newer portable devices such as Apple's iPod. By tracking the play count, duration and time, the site provides suggestions to the user for new bands to hear, allows social networking by showing users with similar musical tastes, and provides weekly charts on ``what's hot''.
 \subsection{The Filter}
-The Filter is a soon to be released plugin for Apple's iTunes, this time providing interpolative playlist generation similar to what I hope to implement. By using statistical methods similar to Ruffle, it provides `smart' generation of playlists either by specifying key tracks, or by exploring a specified genre.
+The Filter is a plugin for Apple's iTunes, providing interpolative playlist generation similar to what I have implemented. It uses a statistical method similar to Ruffle's, providing `smart' generation of playlists either by specifying key tracks, or by exploring a specified genre.
 \subsection{MoC: Master of Celebration}
 \subsection{iTunes Party Shuffle}
 \section{Literature}
-\begin{itemize}
-	\item critical review of how the literature describes and explains the issue
-\end{itemize}
+\note{critical review of how the literature describes and explains the issue}
 \begin{itemize}
 	\item \citet*{Aucouturier2002,Aucouturier2002a,Aucouturier2003}
 	\item \citet*{Logan2002}
 \end{itemize}
 \section{Review and Identification of Problem Areas}
-\begin{itemize}
-	\item identification of key concepts and gaps in existing research
-\end{itemize}
+\note{identification of key concepts and gaps in existing research}
 \begin{itemize}
 	\item How did previous attempts manage?
 	\item Were they successful in achieving their objectives?
