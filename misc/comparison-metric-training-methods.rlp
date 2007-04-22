@@ -1,0 +1,500 @@
+;RLP 1.0
+;File "/home/george/comparison-metric-training-methods.rlp" created by RLPlot version 1.1.2 for Qt 
+;Date/Time: Sun Apr 22 19:45:13 2007
+ 
+[1=Bar]
+Type= 257
+ssRef=(2){ -1 -1 1 1}
+Pos= 0.7 469.23
+Size= 100
+Org= 0 0
+Line= 0.2 6 0x0 0x0
+Fill= 0 0x000000ff 1 0x0 0x00ffffff
+FillLine= 0 6 0x0 0x0
+
+[2=Bar]
+Type= 257
+ssRef=(2){ -1 -1 1 2}
+Pos= 1.7 484.39
+Size= 100
+Org= 0 0
+Line= 0.2 6 0x0 0x0
+Fill= 0 0x000000ff 1 0x0 0x00ffffff
+FillLine= 0 6 0x0 0x0
+
+[3=Bar]
+Type= 257
+ssRef=(2){ -1 -1 1 3}
+Pos= 2.7 463.81
+Size= 100
+Org= 0 0
+Line= 0.2 6 0x0 0x0
+Fill= 0 0x000000ff 1 0x0 0x00ffffff
+FillLine= 0 6 0x0 0x0
+
+[4=Bar]
+Type= 257
+ssRef=(2){ -1 -1 1 4}
+Pos= 3.7 474.35
+Size= 100
+Org= 0 0
+Line= 0.2 6 0x0 0x0
+Fill= 0 0x000000ff 1 0x0 0x00ffffff
+FillLine= 0 6 0x0 0x0
+
+[5=PlotScatt]
+Bounds= 0 484.39 3.7 0
+baDist= 0.2 0
+Bars=(4){1 2 3 4}
+
+[6=Bar]
+Type= 257
+ssRef=(2){ -1 -1 2 1}
+Pos= 0.9 493.97
+Size= 100
+Org= 0 0
+Line= 0.2 6 0x0 0x0
+Fill= 0 0x0000ff00 1 0x0 0x00ffffff
+FillLine= 0 6 0x0 0x0
+
+[7=Bar]
+Type= 257
+ssRef=(2){ -1 -1 2 2}
+Pos= 1.9 507.47
+Size= 100
+Org= 0 0
+Line= 0.2 6 0x0 0x0
+Fill= 0 0x0000ff00 1 0x0 0x00ffffff
+FillLine= 0 6 0x0 0x0
+
+[8=Bar]
+Type= 257
+ssRef=(2){ -1 -1 2 3}
+Pos= 2.9 481.26
+Size= 100
+Org= 0 0
+Line= 0.2 6 0x0 0x0
+Fill= 0 0x0000ff00 1 0x0 0x00ffffff
+FillLine= 0 6 0x0 0x0
+
+[9=Bar]
+Type= 257
+ssRef=(2){ -1 -1 2 4}
+Pos= 3.9 499.44
+Size= 100
+Org= 0 0
+Line= 0.2 6 0x0 0x0
+Fill= 0 0x0000ff00 1 0x0 0x00ffffff
+FillLine= 0 6 0x0 0x0
+
+[10=PlotScatt]
+Bounds= 0 507.47 3.9 0
+baDist= 0.2 0
+Bars=(4){6 7 8 9}
+
+[11=Bar]
+Type= 257
+ssRef=(2){ -1 -1 3 1}
+Pos= 1.1 493.97
+Size= 100
+Org= 0 0
+Line= 0.2 6 0x0 0x0
+Fill= 0 0x00ff0000 1 0x0 0x00ffffff
+FillLine= 0 6 0x0 0x0
+
+[12=Bar]
+Type= 257
+ssRef=(2){ -1 -1 3 2}
+Pos= 2.1 507.47
+Size= 100
+Org= 0 0
+Line= 0.2 6 0x0 0x0
+Fill= 0 0x00ff0000 1 0x0 0x00ffffff
+FillLine= 0 6 0x0 0x0
+
+[13=Bar]
+Type= 257
+ssRef=(2){ -1 -1 3 3}
+Pos= 3.1 481.19
+Size= 100
+Org= 0 0
+Line= 0.2 6 0x0 0x0
+Fill= 0 0x00ff0000 1 0x0 0x00ffffff
+FillLine= 0 6 0x0 0x0
+
+[14=Bar]
+Type= 257
+ssRef=(2){ -1 -1 3 4}
+Pos= 4.1 499.44
+Size= 100
+Org= 0 0
+Line= 0.2 6 0x0 0x0
+Fill= 0 0x00ff0000 1 0x0 0x00ffffff
+FillLine= 0 6 0x0 0x0
+
+[15=PlotScatt]
+Bounds= 0 507.47 4.1 0
+baDist= 0.2 0
+Bars=(4){11 12 13 14}
+
+[16=Bar]
+Type= 257
+ssRef=(2){ -1 -1 4 1}
+Pos= 1.3 488.85
+Size= 100
+Org= 0 0
+Line= 0.2 6 0x0 0x0
+Fill= 0 0x0000ffff 1 0x0 0x00ffffff
+FillLine= 0 6 0x0 0x0
+
+[17=Bar]
+Type= 257
+ssRef=(2){ -1 -1 4 2}
+Pos= 2.3 500.52
+Size= 100
+Org= 0 0
+Line= 0.2 6 0x0 0x0
+Fill= 0 0x0000ffff 1 0x0 0x00ffffff
+FillLine= 0 6 0x0 0x0
+
+[18=Bar]
+Type= 257
+ssRef=(2){ -1 -1 4 3}
+Pos= 3.3 473.39
+Size= 100
+Org= 0 0
+Line= 0.2 6 0x0 0x0
+Fill= 0 0x0000ffff 1 0x0 0x00ffffff
+FillLine= 0 6 0x0 0x0
+
+[19=Bar]
+Type= 257
+ssRef=(2){ -1 -1 4 4}
+Pos= 4.3 495.37
+Size= 100
+Org= 0 0
+Line= 0.2 6 0x0 0x0
+Fill= 0 0x0000ffff 1 0x0 0x00ffffff
+FillLine= 0 6 0x0 0x0
+
+[20=PlotScatt]
+Bounds= 0 500.52 4.3 0
+baDist= 0.2 0
+Bars=(4){16 17 18 19}
+
+[21=Stacked]
+Bounds= 0 507.47 4.3 0
+Plots=(4){5 10 15 20}
+
+[22=Label]
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 0 1 0 0 "Untrained"
+
+[23=LegItem]
+D_Line= 0.1 6 0x0 0x0
+O_Line= 0.2 6 0x0 0x0
+H_Line= 0 6 0x0 0x0
+Fill= 0 0x000000ff 1 0x0 0x00ffffff
+Text= 22
+flags= 0x00000002
+
+[24=Label]
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 0 1 0 0 "Both"
+
+[25=LegItem]
+D_Line= 0.1 6 0x0 0x0
+O_Line= 0.2 6 0x0 0x0
+H_Line= 0 6 0x0 0x0
+Fill= 0 0x0000ff00 1 0x0 0x00ffffff
+Text= 24
+flags= 0x00000002
+
+[26=Label]
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 0 1 0 0 "Albums"
+
+[27=LegItem]
+D_Line= 0.1 6 0x0 0x0
+O_Line= 0.2 6 0x0 0x0
+H_Line= 0 6 0x0 0x0
+Fill= 0 0x00ff0000 1 0x0 0x00ffffff
+Text= 26
+flags= 0x00000002
+
+[28=Label]
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 0 1 0 0 "Answers"
+
+[29=LegItem]
+D_Line= 0.1 6 0x0 0x0
+O_Line= 0.2 6 0x0 0x0
+H_Line= 0 6 0x0 0x0
+Fill= 0 0x0000ffff 1 0x0 0x00ffffff
+Text= 28
+flags= 0x00000002
+
+[30=Legend]
+pos= 0 0
+rec1= 25 17 40 12
+rec2= 7 4 13 0
+rec3= 2 4 13 0
+Items=(4){23 25 27 29}
+
+[31=Tick]
+Val= 0
+Flags= 0x00000242
+GridType= 48
+Size= 2
+
+[32=Label]
+Dist= 0 4
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 1 1 0 0 "Ordered"
+
+[33=Tick]
+Val= 1
+Flags= 0x00000242
+GridType= 48
+Label= 32
+Size= 2
+
+[34=Label]
+Dist= 0 4
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 1 1 0 0 "Ordered"
+
+[35=Label]
+Dist= 0 4
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 1 1 0 0 "Area"
+
+[36=mLabel]
+Dist= 0 4
+lspc= 1
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 1 1 0 0
+Lines=(2){34 35}
+
+[37=Tick]
+Val= 2
+Flags= 0x00000242
+GridType= 48
+Label= 36
+Size= 2
+
+[38=Label]
+Dist= 0 4
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 1 1 0 0 "Sorted"
+
+[39=Tick]
+Val= 3
+Flags= 0x00000242
+GridType= 48
+Label= 38
+Size= 2
+
+[40=Label]
+Dist= 0 4
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 1 1 0 0 "Exhaustive"
+
+[41=Tick]
+Val= 4
+Flags= 0x00000242
+GridType= 48
+Label= 40
+Size= 2
+
+[42=Tick]
+Val= 5
+Flags= 0x00000242
+GridType= 48
+Size= 2
+
+[43=Label]
+Pos= 82.5 98
+Dist= 0 12
+Flags= 0x00000020
+TxtDef= 0x00000000 0x00ffffff 3.6 0 0 1 1 0 0 "Similarity Metric"
+
+[44=Axis]
+Type= 1
+sAxLine= 0.2
+sAxTick= 2
+BrkGap= 2
+BrkSymSize= 3
+BrkSym= 2
+sTickLabel= 3
+LbDist= 0 8
+TickLbDist= 0 4
+Color= 0x00000000
+AxisDef=0x00000242 0 5 25 90 0 140 90 0 0 1 0 0 0 0
+GridLine= 0.1 6 0x00808080 0xf8f8f8f8
+GridType= 48
+Ticks=(6){31 33 37 39 41 42}
+Label= 43
+tlbDef= 0x00000000 0x00ffffff 3 0 0 1 1 0 0
+
+[45=GridLine]
+Type= 3
+Line= 0.1 6 0x00808080 0xf8f8f8f8
+flags= 0x00000216
+
+[46=Label]
+Dist= -4 0
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 6 1 0 0 "440"
+
+[47=Tick]
+Val= 440
+Flags= 0x00000216
+GridType= 3
+Grid= 45
+Label= 46
+Size= 2
+
+[48=GridLine]
+Type= 3
+Line= 0.1 6 0x00808080 0xf8f8f8f8
+flags= 0x00000216
+
+[49=Label]
+Dist= -4 0
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 6 1 0 0 "460"
+
+[50=Tick]
+Val= 460
+Flags= 0x00000216
+GridType= 3
+Grid= 48
+Label= 49
+Size= 2
+
+[51=GridLine]
+Type= 3
+Line= 0.1 6 0x00808080 0xf8f8f8f8
+flags= 0x00000216
+
+[52=Label]
+Dist= -4 0
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 6 1 0 0 "480"
+
+[53=Tick]
+Val= 480
+Flags= 0x00000216
+GridType= 3
+Grid= 51
+Label= 52
+Size= 2
+
+[54=GridLine]
+Type= 3
+Line= 0.1 6 0x00808080 0xf8f8f8f8
+flags= 0x00000216
+
+[55=Label]
+Dist= -4 0
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 6 1 0 0 "500"
+
+[56=Tick]
+Val= 500
+Flags= 0x00000216
+GridType= 3
+Grid= 54
+Label= 55
+Size= 2
+
+[57=GridLine]
+Type= 3
+Line= 0.1 6 0x00808080 0xf8f8f8f8
+flags= 0x00000216
+
+[58=Label]
+Dist= -4 0
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 6 1 0 0 "520"
+
+[59=Tick]
+Val= 520
+Flags= 0x00000216
+GridType= 3
+Grid= 57
+Label= 58
+Size= 2
+
+[60=Label]
+Pos= 13 50
+Dist= -12 0
+Flags= 0x00000002
+TxtDef= 0x00000000 0x00ffffff 3.6 90 0 9 1 0 0 "Average Placement of Similar Track"
+
+[61=Axis]
+Type= 2
+sAxLine= 0.2
+sAxTick= 2
+BrkGap= 2
+BrkSymSize= 3
+BrkSym= 2
+sTickLabel= 3
+LbDist= -12 0
+TickLbDist= -4 0
+Color= 0x00000000
+AxisDef=0x00000216 440 520 25 10 0 25 90 0 440 20 0 0 0 0
+GridLine= 0.1 6 0x00808080 0xf8f8f8f8
+GridType= 3
+Ticks=(5){47 50 53 56 59}
+Label= 60
+tlbDef= 0x00000000 0x00ffffff 3 0 0 6 1 0 0
+
+[62=Axis]
+Type= 1
+sAxLine= 0.2
+sAxTick= 2
+BrkGap= 2
+BrkSymSize= 3
+BrkSym= 2
+sTickLabel= 3
+LbDist= 0 -8
+TickLbDist= 0 -4
+Color= 0x00000000
+AxisDef=0x00000230 0.5 5 25 10 0 140 10 0 0.5 0.5 0 0 0 0
+GridLine= 0.1 6 0x00808080 0xf8f8f8f8
+GridType= 48
+tlbDef= 0x00000000 0x00ffffff 3 0 0 9 1 0 0
+
+[63=Axis]
+Type= 2
+sAxLine= 0.2
+sAxTick= 2
+BrkGap= 2
+BrkSymSize= 3
+BrkSym= 2
+sTickLabel= 3
+LbDist= 12 0
+TickLbDist= 4 0
+Color= 0x00000000
+AxisDef=0x00000220 460 540 140 10 0 140 90 0 460 10 0 0 0 0
+GridLine= 0.1 6 0x00808080 0xf8f8f8f8
+GridType= 3
+tlbDef= 0x00000000 0x00ffffff 3 0 0 4 1 0 0
+
+[64=Graph]
+Type= 1
+GRect= 0 110 160 0
+DRect= 25 90 140 10
+Bounds= 0.7 507.47 4.3 0
+ColFrame= 0x00ffffff
+ColFrameL= 0x00e0e0e0
+ColRec= 0x00ffffff
+ColAxis= 0x00000000
+Xaxis=0x00000242 0 5 25 90 0 140 90 0 0 1 0 0 0 0
+Yaxis=0x00000216 440 520 25 10 0 25 90 0 440 20 0 0 0 0
+DefXAxis= 0
+DefYAxis= 1
+Axes=(4){44 61 62 63}
+Plots=(2){21 30}

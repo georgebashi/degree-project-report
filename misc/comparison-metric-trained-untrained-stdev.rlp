@@ -1,0 +1,418 @@
+;RLP 1.0
+;File "/home/george/comparison-metric-trained-untrained-stdev" created by RLPlot version 1.1.2 for Qt 
+;Date/Time: Sun Apr 22 19:24:35 2007
+ 
+[1=Bar]
+Type= 257
+ssRef=(2){ -1 -1 1 1}
+Pos= 0.833333 354.65
+Size= 100
+Org= 0 0
+Line= 0.2 6 0x0 0x0
+Fill= 0 0x000000ff 1 0x0 0x00ffffff
+FillLine= 0 6 0x0 0x0
+
+[2=Bar]
+Type= 257
+ssRef=(2){ -1 -1 1 2}
+Pos= 1.83333 370.1
+Size= 100
+Org= 0 0
+Line= 0.2 6 0x0 0x0
+Fill= 0 0x000000ff 1 0x0 0x00ffffff
+FillLine= 0 6 0x0 0x0
+
+[3=Bar]
+Type= 257
+ssRef=(2){ -1 -1 1 3}
+Pos= 2.83333 338.19
+Size= 100
+Org= 0 0
+Line= 0.2 6 0x0 0x0
+Fill= 0 0x000000ff 1 0x0 0x00ffffff
+FillLine= 0 6 0x0 0x0
+
+[4=Bar]
+Type= 257
+ssRef=(2){ -1 -1 1 4}
+Pos= 3.83333 353.99
+Size= 100
+Org= 0 0
+Line= 0.2 6 0x0 0x0
+Fill= 0 0x000000ff 1 0x0 0x00ffffff
+FillLine= 0 6 0x0 0x0
+
+[5=PlotScatt]
+Bounds= 0 370.1 3.83333 0
+baDist= 0.333333 0
+Bars=(4){1 2 3 4}
+
+[6=Bar]
+Type= 257
+ssRef=(2){ -1 -1 2 1}
+Pos= 1.16667 363.67
+Size= 100
+Org= 0 0
+Line= 0.2 6 0x0 0x0
+Fill= 0 0x0000ff00 1 0x0 0x00ffffff
+FillLine= 0 6 0x0 0x0
+
+[7=Bar]
+Type= 257
+ssRef=(2){ -1 -1 2 2}
+Pos= 2.16667 379.27
+Size= 100
+Org= 0 0
+Line= 0.2 6 0x0 0x0
+Fill= 0 0x0000ff00 1 0x0 0x00ffffff
+FillLine= 0 6 0x0 0x0
+
+[8=Bar]
+Type= 257
+ssRef=(2){ -1 -1 2 3}
+Pos= 3.16667 344.64
+Size= 100
+Org= 0 0
+Line= 0.2 6 0x0 0x0
+Fill= 0 0x0000ff00 1 0x0 0x00ffffff
+FillLine= 0 6 0x0 0x0
+
+[9=Bar]
+Type= 257
+ssRef=(2){ -1 -1 2 4}
+Pos= 4.16667 364.79
+Size= 100
+Org= 0 0
+Line= 0.2 6 0x0 0x0
+Fill= 0 0x0000ff00 1 0x0 0x00ffffff
+FillLine= 0 6 0x0 0x0
+
+[10=PlotScatt]
+Bounds= 0 379.27 4.16667 0
+baDist= 0.333333 0
+Bars=(4){6 7 8 9}
+
+[11=Stacked]
+Bounds= 0 379.27 4.16667 0
+Plots=(2){5 10}
+
+[12=Label]
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 0 1 0 0 "Untrained"
+
+[13=LegItem]
+D_Line= 0.1 6 0x0 0x0
+O_Line= 0.2 6 0x0 0x0
+H_Line= 0 6 0x0 0x0
+Fill= 0 0x000000ff 1 0x0 0x00ffffff
+Text= 12
+flags= 0x00000002
+
+[14=Label]
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 0 1 0 0 "Trained"
+
+[15=LegItem]
+D_Line= 0.1 6 0x0 0x0
+O_Line= 0.2 6 0x0 0x0
+H_Line= 0 6 0x0 0x0
+Fill= 0 0x0000ff00 1 0x0 0x00ffffff
+Text= 14
+flags= 0x00000002
+
+[16=Legend]
+pos= 0 0
+rec1= 25 17 40 12
+rec2= 7 4 13 0
+rec3= 2 4 13 0
+Items=(2){13 15}
+
+[17=Tick]
+Val= 0
+Flags= 0x00000242
+GridType= 48
+Size= 2
+
+[18=Label]
+Dist= 0 4
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 1 1 0 0 "Ordered"
+
+[19=Tick]
+Val= 1
+Flags= 0x00000242
+GridType= 48
+Label= 18
+Size= 2
+
+[20=Label]
+Dist= 0 4
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 1 1 0 0 "Ordered"
+
+[21=Label]
+Dist= 0 4
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 1 1 0 0 "Area"
+
+[22=mLabel]
+Dist= 0 4
+lspc= 1
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 1 1 0 0
+Lines=(2){20 21}
+
+[23=Tick]
+Val= 2
+Flags= 0x00000242
+GridType= 48
+Label= 22
+Size= 2
+
+[24=Label]
+Dist= 0 4
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 1 1 0 0 "Sorted"
+
+[25=Tick]
+Val= 3
+Flags= 0x00000242
+GridType= 48
+Label= 24
+Size= 2
+
+[26=Label]
+Dist= 0 4
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 1 1 0 0 "Exhaustive"
+
+[27=Tick]
+Val= 4
+Flags= 0x00000242
+GridType= 48
+Label= 26
+Size= 2
+
+[28=Tick]
+Val= 5
+Flags= 0x00000242
+GridType= 48
+Size= 2
+
+[29=Label]
+Pos= 82.5 98
+Dist= 0 12
+Flags= 0x00000020
+TxtDef= 0x00000000 0x00ffffff 3.6 0 0 1 1 0 0 "Similarity Metric"
+
+[30=Axis]
+Type= 1
+sAxLine= 0.2
+sAxTick= 2
+BrkGap= 2
+BrkSymSize= 3
+BrkSym= 2
+sTickLabel= 3
+LbDist= 0 8
+TickLbDist= 0 4
+Color= 0x00000000
+AxisDef=0x00000242 0 5 25 90 0 140 90 0 0 1 0 0 0 0
+GridLine= 0.1 6 0x00808080 0xf8f8f8f8
+GridType= 48
+Ticks=(6){17 19 23 25 27 28}
+Label= 29
+tlbDef= 0x00000000 0x00ffffff 3 0 0 1 1 0 0
+
+[31=GridLine]
+Type= 3
+Line= 0.1 6 0x00808080 0xf8f8f8f8
+flags= 0x00000216
+
+[32=Label]
+Dist= -4 0
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 6 1 0 0 "300"
+
+[33=Tick]
+Val= 300
+Flags= 0x00000216
+GridType= 3
+Grid= 31
+Label= 32
+Size= 2
+
+[34=GridLine]
+Type= 3
+Line= 0.1 6 0x00808080 0xf8f8f8f8
+flags= 0x00000216
+
+[35=Label]
+Dist= -4 0
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 6 1 0 0 "320"
+
+[36=Tick]
+Val= 320
+Flags= 0x00000216
+GridType= 3
+Grid= 34
+Label= 35
+Size= 2
+
+[37=GridLine]
+Type= 3
+Line= 0.1 6 0x00808080 0xf8f8f8f8
+flags= 0x00000216
+
+[38=Label]
+Dist= -4 0
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 6 1 0 0 "340"
+
+[39=Tick]
+Val= 340
+Flags= 0x00000216
+GridType= 3
+Grid= 37
+Label= 38
+Size= 2
+
+[40=GridLine]
+Type= 3
+Line= 0.1 6 0x00808080 0xf8f8f8f8
+flags= 0x00000216
+
+[41=Label]
+Dist= -4 0
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 6 1 0 0 "360"
+
+[42=Tick]
+Val= 360
+Flags= 0x00000216
+GridType= 3
+Grid= 40
+Label= 41
+Size= 2
+
+[43=GridLine]
+Type= 3
+Line= 0.1 6 0x00808080 0xf8f8f8f8
+flags= 0x00000216
+
+[44=Label]
+Dist= -4 0
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 6 1 0 0 "380"
+
+[45=Tick]
+Val= 380
+Flags= 0x00000216
+GridType= 3
+Grid= 43
+Label= 44
+Size= 2
+
+[46=GridLine]
+Type= 3
+Line= 0.1 6 0x00808080 0xf8f8f8f8
+flags= 0x00000216
+
+[47=Label]
+Dist= -4 0
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3 0 0 6 1 0 0 "400"
+
+[48=Tick]
+Val= 400
+Flags= 0x00000216
+GridType= 3
+Grid= 46
+Label= 47
+Size= 2
+
+[49=Label]
+Pos= 13 50
+Dist= -12 0
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3.6 90 0 9 1 0 0 "Standard Devation of"
+
+[50=Label]
+Pos= 13 50
+Dist= -12 0
+Flags= 0x00000022
+TxtDef= 0x00000000 0x00ffffff 3.6 90 0 9 1 0 0 "Similar Track Placement"
+
+[51=mLabel]
+Pos= 13 50
+Dist= -12 0
+lspc= 1
+Flags= 0x00000002
+TxtDef= 0x00000000 0x00ffffff 3.6 90 0 9 1 0 0
+Lines=(2){49 50}
+
+[52=Axis]
+Type= 2
+sAxLine= 0.2
+sAxTick= 2
+BrkGap= 2
+BrkSymSize= 3
+BrkSym= 2
+sTickLabel= 3
+LbDist= -12 0
+TickLbDist= -4 0
+Color= 0x00000000
+AxisDef=0x00000216 300 400 25 10 0 25 90 0 300 20 0 0 0 0
+GridLine= 0.1 6 0x00808080 0xf8f8f8f8
+GridType= 3
+Ticks=(6){33 36 39 42 45 48}
+Label= 51
+tlbDef= 0x00000000 0x00ffffff 3 0 0 6 1 0 0
+
+[53=Axis]
+Type= 1
+sAxLine= 0.2
+sAxTick= 2
+BrkGap= 2
+BrkSymSize= 3
+BrkSym= 2
+sTickLabel= 3
+LbDist= 0 -8
+TickLbDist= 0 -4
+Color= 0x00000000
+AxisDef=0x00000230 0.5 4.5 25 10 0 140 10 0 0.5 0.5 0 0 0 0
+GridLine= 0.1 6 0x00808080 0xf8f8f8f8
+GridType= 48
+tlbDef= 0x00000000 0x00ffffff 3 0 0 9 1 0 0
+
+[54=Axis]
+Type= 2
+sAxLine= 0.2
+sAxTick= 2
+BrkGap= 2
+BrkSymSize= 3
+BrkSym= 2
+sTickLabel= 3
+LbDist= 12 0
+TickLbDist= 4 0
+Color= 0x00000000
+AxisDef=0x00000220 330 400 140 10 0 140 90 0 330 10 0 0 0 0
+GridLine= 0.1 6 0x00808080 0xf8f8f8f8
+GridType= 3
+tlbDef= 0x00000000 0x00ffffff 3 0 0 4 1 0 0
+
+[55=Graph]
+Type= 1
+GRect= 0 110 160 0
+DRect= 25 90 140 10
+Bounds= 0.833333 379.27 4.16667 0
+ColFrame= 0x00ffffff
+ColFrameL= 0x00e0e0e0
+ColRec= 0x00ffffff
+ColAxis= 0x00000000
+Xaxis=0x00000242 0 5 25 90 0 140 90 0 0 1 0 0 0 0
+Yaxis=0x00000216 300 400 25 10 0 25 90 0 300 20 0 0 0 0
+DefXAxis= 0
+DefYAxis= 1
+Axes=(4){30 52 53 54}
+Plots=(2){11 16}

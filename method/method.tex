@@ -114,7 +114,7 @@ This approach is similar to the exhaustive comparison in that it is unaffected b
 The similarity measure used when sorting the tracks based on their similarity to the ideal track works solely on the song features, in order to cut down on the processing required to generate a playlist. If the playlist generator were to sort using the similarity to a set of interpolated feature blocks, each song in the media library would have to be compared multiple times to the `ideal' feature blocks, and it would be very computationally expensive. When calculating the score of each track (when removing artists), the feature blocks are taken into account to obtain a better similarity metric, and an weight added to the song features ($W_S$) and feature blocks ($W_B$) to bias the scores so they are not too dissimilar between the two similarity metrics.
 \section{Weight Optimisation}
 \note{why have weights for the features, why train them}
-
+As the 
 \begin{itemize}
 	\item explain how the weight training works - listener testing app which plays three clips, the user selects which two are most similar
 	\item why this helps us
