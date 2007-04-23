@@ -11,12 +11,15 @@
 \usepackage[latin1]{inputenc}
 \usepackage{url}
 \usepackage{subfigure}
+\usepackage{alltt}
+\usepackage{moreverb}
 
 \bibliographystyle{plainnat}
 \bibpunct{(}{)}{;}{a}{,}{,}
 
 \newcommand{\coderef}[2]{\texttt{#1:#2}}
 \newcommand{\codepageref}[2]{\texttt{#1:#2}, page \pageref{code:#1}}
+\newcommand{\codefilepageref}[1]{\texttt{#1}, page \pageref{code:#1}}
 \newcommand{\software}[1]{\texttt{#1}}
 \newcommand{\note}[1]{\begin{itemize}
 	\item \textcolor{blue}{#1}

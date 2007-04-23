@@ -1,27 +1,59 @@
-\chapter{Testing (1000)}
+\chapter{Testing (626/500)}
+Testing the functioning, performance and accuracy of the system allows for evaluation as to how well the system meets its specification and purpose. Three methods have been employed for testing the areas of the system, and will help identify strengths, weaknesses, and areas for improvement later in the analysis.
 \section{Functional Testing}
-\begin{itemize}
-	\item Method used
-	\item Results
-	\item Summary
-\end{itemize}
-\subsection{System Output}
-show various playlists using different criteria
+\label{text:testing:functional}
+\note{Method Used}
+To show correct operation of the system and give examples of generated playlists, excerpts of the output of the program are given along with some example queries and their output.
+\note{Results}
+\subsection{\executable{extractor}}
+For this test, the feature extractor was run on three tracks from \emph{Kasabian}'s album, \emph{Empire}.\\
+\input{testing/output/extractor}
+The three tracks were processed, and the features written out to files on disk, 12KB, 8KB and 24KB in size respectively.
+\subsection{\executable{viewer}}
+To show the operation of \executable{viewer}, it was run on one of the feature vectors outputted by \executable{extractor} above, to show the feature blocks (output summarised).\\
+\input{testing/output/viewer}
+\subsection{\executable{learner}}
+After all songs were processed and the listener test was performed to gain around 100 results, the learner was run to calculate a set of weights:\\
+\input{testing/output/learner}
+These weights were then pasted into the code of \executable{generator} and recompiled to be used in subsequent testing.
+\pagebreak
+\subsection{\executable{generator}}
+\subsubsection{Similarity Measure}
+For the first test, the playlist generator was run to provide the 50 most similar tracks to the given song, \emph{Quick and to the Pointless} by \emph{Queens of the Stone Age}. NB: there was only one \emph{Queens of the Stone Age} track in the media library, hence no others appearing in the results. The distance for each track appears in brackets after the file name.\\
+\input{testing/output/generator-similar}
+\subsubsection{Playlist Generation}
+To test the playlist generation, two playlists were generated to highlight difficulties in creating `good' playlists with the technique described: a short playlist between two tracks disparate in genre (as it is difficult to create a smooth progression with only a small amount of tracks), and a long playlist between two similar songs (as finding tracks by \emph{different artists} which can create a smooth transition is difficult).
+
+First, the short playlist, between a fast-paced aggressive track by \emph{System of a Down}, and a slow, calm and atmospheric track by \emph{Four Tet}.\\
+\input{testing/output/generator-playlist-short}
+Second, the long playlist, between two tracks by \emph{Saves the Day}, both melodic, up-beat songs with vocals.\\
+\input{testing/output/generator-playlist-long}
+It can be seen that in both playlists, \executable{generator} found difficulty in generating a `good' playlist while still adhering to the no-repeated-artists rule.
+\pagebreak
 \section{Automated Testing}
-\begin{itemize}
-	\item Method used
-	\item Results
-	\item Summary
-\end{itemize}
+As discussed previously (in Method, page \pageref{text:method:weight_optimisation}), it is possible to use the output from the listener test to rate the system's accuracy before and after training. For each of the results, \executable{evaluate.rb} generates a playlist with each of the four comparison methods. The average position of the similar and not-similar tracks are then taken, along with their standard deviation, and the difference between placement of the similar and not-similar track. Low values for the average placement of similar tracks and standard deviation, as well as high values for the difference between similar and not-similar would indicate an accurate system.
+\subsection{Results}
+Figure \ref{graph:metric-comparison} shows a comparison of the four track comparison methods detailed on page \ref{text:method:comparison_methods}, before any training (all weights set to 1). These results show that the sorted comparison performed the best overall (higher average placement of similar track, less deviation from the mean, and a high difference between similar and not-similar tracks.
+
+After initial testing, it seemed that training the system actually provided \emph{worse} accuracy. To investigate this further, I modified the source code of \executable{learner} to only train on the albums in the user's media library or on the answers from the listener test, and re-ran the test (figure \ref{graph:training-method-comparison}). The general trend from the data shows that the more data used in training, the worse the accuracy of the similarity metric.
+ 
+Table \ref{table:testing_data} shows a summary of data from all tests.
+\input{testing/data}
+\newcommand{\graph}[2]{
 \begin{figure}[hp]
-	\caption{PPOOOPOPO}
-	\includegraphics[width=\textwidth]{testing/graphs/comparison-metric-trained-untrained}
-	\label{graph:trained-untrained}
-\end{figure}
-\section{User Testing(?)}
-Do I even need to do this any more?
+	\caption{#2}
+	\includegraphics[width=\textwidth]{testing/graphs/#1}
+	\label{graph:#1}
+\end{figure}}
+\graph{metric-comparison}{Comparison of Similarity Metrics}
+\graph{training-method-comparison}{Comparison of Training Methods}
+%\graph{training-algorithm-comparison}{Comparison of Training Algorithms}
+\pagebreak
+\section{User Testing}
 \begin{itemize}
 	\item Method used
 	\item Results
 	\item Summary
 \end{itemize}
+\section{Summary}
+

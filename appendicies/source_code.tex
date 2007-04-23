@@ -8,24 +8,37 @@
 \small
 \input{appendicies/code/#1.tex}
 }
+The source code of the system follows. Files are listed in compilation order, that is, each file depends only on the ones appearing earlier. The two \software{Ruby} scripts are themselves executable with a \software{Ruby} interpreter; the \software{C++} source must first be compiled and linked with \software{libpopt}, \software{FFTW3} and \software{libsndfile}, and has a run-time dependency on \software{GStreamer}.
 
+The following versions of software were used in development:
+\begin{description}
+	\item[\software{GCC}] 4.1.2
+	\item[\software{Ruby}] 1.8.5
+	\item[\software{Ubuntu Linux}] 7.04
+	\item[\software{libpopt}] 1.10
+	\item[\software{FFTW}] 3.1.2
+	\item[\software{libsndfile}] 1.0.16
+	\item[\software{GStreamer}] 0.10.12
+\end{description}
+\inputcode{listenertest.rb}
+\inputcode{evaluate.rb}
 \inputcode{common.hh}
-\inputcode{extractor.cc}
-\inputcode{SoundFile.hh}
-\inputcode{SoundFile.cc}
 \inputcode{FFT.hh}
 \inputcode{FFT.cc}
 \inputcode{Features.hh}
 \inputcode{Features.cc}
 \inputcode{Song.hh}
 \inputcode{Song.cc}
+\inputcode{viewer.cc}
+\inputcode{SoundFile.hh}
+\inputcode{SoundFile.cc}
+\inputcode{extractor.cc}
 \inputcode{SongSet.hh}
 \inputcode{SongSet.cc}
+\inputcode{learner.hh}
+\inputcode{learner.cc}
 \inputcode{Playlist.hh}
 \inputcode{Playlist.cc}
 \inputcode{generator.hh}
 \inputcode{generator.cc}
-\inputcode{learner.hh}
-\inputcode{learner.cc}
-\inputcode{viewer.cc}
-\inputcode{listenertest.rb}
+
