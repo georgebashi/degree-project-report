@@ -8,43 +8,44 @@ tempo
 instrumentation
 
 
-./generator --dir=../test -c sorted -s 50 ../test/…
-                            …Sneaker\ Pimps/Becoming\ X/08\ Roll\ On.flac.vec >…
-                            … test.m3u
+./generator --dir=../test -c sorted -s 50 ../test/Sneaker\ Pimps/Becoming\ X/08\ Roll\ On.flac.vec > test.m3u
 #1:
+faster
+very similar
+more melodic
+
+#2:
 similar beats
 female vocals
-simliar tempo
+simliar tempo to the previous
 use of samples
 
-#2
+#3
 simliar breakbeat-style
 this one more repetitive
 
-#3
+#4
 very similar, but brighter and busier
 
-#4
+#5
 change of pace
 similar structure
 very different vocals
 compltely different genre
 fairly similar
 
-#5
+#6
 similar instrumentation
 
-#6
+#7
 much slower
 similar vocals
 quite different
 
-#7
+#8
 completely different
 
-./generator --dir=../test -c sorted -n 7 ../test/Trash\ Palace/Positions/Positions-12-X\ Dummy.mp3.vec ../test/Whitey/The\ Light\…
-                            … at\ the\ End\ of\ the\ Tunnel\ is\ a\ Train/The\ Light\ at\ the\ End\ of\ the\ Tunnel\ is\ a\ Train-02-Leave\ Them\ All\ Behind.…
-                            …mp3.vec ../test/Primus/Brown\ Album/Brown\ Album-13-Kalamazoo.mp3.vec
+./generator --dir=../test -c sorted -n 7 ../test/Trash\ Palace/Positions/Positions-12-X\ Dummy.mp3.vec ../test/Whitey/The\ Light\ at\ the\ End\ of\ the\ Tunnel\ is\ a\ Train/The\ Light\ at\ the\ End\ of\ the\ Tunnel\ is\ a\ Train-02-Leave\ Them\ All\ Behind.mp3.vec ../test/Primus/Brown\ Album/Brown\ Album-13-Kalamazoo.mp3.vec
                             
 alkaline trio twice?? bug!
 saves the day and transplants completely wrong

@@ -4,7 +4,7 @@
 	\includegraphics[width=\textwidth]{testing/graphs/#1}
 	\label{graph:#1}
 \end{figure}}
-\chapter{Testing (1439/1000)}
+\chapter{Testing (2007/1000)}
 Testing the functioning, performance and accuracy of the system allows for evaluation as to how well the system meets its specification and purpose. Additionally, testing will help identify strengths, weaknesses, and areas for improvement of the system. Three approaches have been taken to the testing: functional, which will test that the system works as designed and meets specifications; automated testing, giving a measure of the algorithms used and their affect on results; and user testing, gaining feedback on the performance of the system as a useful similarity metric and playlist generator.
 \section{Functional Testing}
 \label{text:testing:functional}
@@ -68,8 +68,22 @@ Table \ref{table:testing_data} provides a summary of data from all tests.
 \input{testing/output/data-table}
 \pagebreak
 \section{User Testing}
-In order to gain valuable user feedback on the performance of the system with regards to similarity measure, I asked three users with prior musical knowledge to comment on playlists generated and a list of similar tracks. The results of these interviews is summarised below.
+In order to gain valuable user feedback on the performance of the system with regards to similarity measure, three users with prior musical knowledge were asked to comment on playlists generated and a list of similar tracks. Also, to gain insight into the user's listening habits, the users were asked to comment on how they generally listened to music. The results of these interviews are summarised below.
 \subsection{Similarity Measure}
+The three users were shown the results of a query of the 10 most similar tracks to one of their choosing, and allowed to play and skip between tracks at will. They were then asked to make a few comments on the similarity of each track to the first.
+\subsubsection{User A}
+User A chose to evaluate the similarity measure on \emph{Roll On} by \emph{Sneaker Pimps}, a down-tempo track with female vocals, a deep bass sound and a punctuated breakbeat rhythm; figure \ref{fig:testing:user:similarity:a}. User A began by saying that the tempo of the first three tracks were greatly increased from the key song chosen. The first four results were overall very similar, especially in instrumentation and rhythm. The first deviation in genre was noted at track five, where there was a ``change of pace and style''. Although the structure and instrumentation were different, the track was still heard to be reasonably similar. User A said that track seven onwards seemed to be almost entirely different in style; it was much slower yet still having similar vocals, which may have caused the similarity measure to rate this track in the top 10 most similar.
+\input{testing/user-testing/similarity-user-a}
 
+It is obvious from the results that while the system was able to find a number of similar tracks, they quickly diminished in similarity, when there are other similar tracks on the same album (\emph{Becoming X}) which were not listed. User A picked up immediately on the changes in tempo for reasons why the tracks were not similar; as the system does not have any feature which is affected greatly by the tempo of the track, adding this may increase similar track selection accuracy.
+\subsubsection{User B}
+\subsubsection{User C}
 \subsection{Playlist Generation}
+In the next test, the three users were allowed to select three tracks to make a playlist; hence having two interpolation regions. They were then asked to comment on how well the playlist `flowed', ie.\ its continuity.
+\subsubsection{User A}
+User A chose a playlist with the tracks \emph{X Dummy} by \emph{Trash Palace}, \emph{Leave Them All Behind} by \emph{Whitey} and \emph{Kalamazoo} by \emph{Primus}. Figure \ref{fig:testing:user:playlist:a} shows the results of this query.
 
+User A chose to comment on the second half of the playlist, the interpolation between \emph{Whitey} and \emph{Primus}. It was however noted that two tracks by \emph{Alkaline Trio} appeared in the first half of the playlist, suggesting a bug in how the artist's name is extracted. User A found that while each track was similar in it's own right with no tracks `sticking out' in the playlist, the tracks failed to flow, frequently changing in genre. This did however produce an interesting result in the choice of \emph{The Cinematic Orchestra} for the track preceding the \emph{Primus} key; it was similar both in tempo, rhythm and instrumentation and flowed well into the next track, though proved unexpected as the tracks were from completely differing genres.
+\input{testing/user-testing/playlist-user-a}
+
+\subsection{Listening Habits}
