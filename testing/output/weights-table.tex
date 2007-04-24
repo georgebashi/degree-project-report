@@ -1,0 +1,28 @@
+\begin{table}[!hbp]
+\caption{Weights outputted by \executable{learner}. The best and worst results in each column and row are coloured green and red respectively.}
+\label{table:weights}
+\centering
+\begin{tabular}{|l|l|l|l|l|l|}
+\cline{2-6}
+\multicolumn{1}{l|}{} & Mean & Variance & Skewness & Kurtosis & \textbf{Mean} \\ 
+\hline
+Zero Crossing Rate & 0.6131 & 0.2051 & 0.5337 & 0.1105 & 0.3656 \\ 
+\hline
+First Order Autocorrelation & 0.3069 & 0.1326 & 0.4530 & 0.0505 & 0.2358 \\ 
+\hline
+Linear Regression & 0.3211 & 0.1840 & 0.4852 & 0.0170 & 0.2518 \\ 
+\hline
+Spectral Centroid & 0.4594 & 0.2063 & 0.4824 & 0.2603 & 0.3521 \\ 
+\hline
+Energy & 0.2797 & 0.1211 & 0.4490 & 0.0466 & \bad{0.2241} \\ 
+\hline
+Spectral Smoothness & 0.6771 & \good{1} & 0.7866 & 0.5455 & \good{0.7523} \\ 
+\hline
+Spectral Spread & 0.9978 & 0.6802 & 0.3065 & 0.0243 & 0.5022 \\ 
+\hline
+Spectral Dissymmetry & 0.7184 & 0.3040 & 0.2971 & \bad{0} & 0.3299 \\ 
+\hline
+\textbf{Mean} & \good{0.5467} & 0.3542 & 0.4742 & \bad{0.1318} & \multicolumn{1}{l}{} \\ 
+\cline{1-5}
+\end{tabular}
+\end{table}
