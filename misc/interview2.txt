@@ -1,0 +1,90 @@
+mood
+rhythm
+harmonicity
+genre
+repetition
+recording style
+tempo
+instrumentation
+
+./generator -s 10 -c sorted --dir=../test/ ../test/Hot\ Chip/The\ Warning/The\ Warning-03-Colours.ogg.vec
+
+track 2 and 3 have similar moods to colours and therefore feel more similar than one which has a similar beat and rhythm
+
+#1:
+more upbeat
+less harmonic
+very similar genre though the vocals are different
+similar instrumentation - very electronic
+
+#2:
+tempo is faster/busier
+no vocals
+both are very atmospheric with a similar style
+completely different genre
+both quite repetitive
+
+#3:
+similar tempo/vocals
+changes mood throughout the track but colours stays pretty similar throughout
+track similar is slightly more similar than 1
+
+#4
+not similar however it has the same structure
+similar rhythm although it is more upbeat
+first track that would stick out in a playlist
+
+#5
+very similar in mood
+both tracks change between areas of smooth vocal areas and upbeat percussive sections
+very electronic
+
+#6
+overall similar in style and genre, but slightly busier
+very similar, would work well in a playlist
+vocals in chorus very similar
+both songs are progressive and continue through till end without breakdown
+
+#7
+not similar at all but some aspects vaguely resemble the structure of K
+
+#8
+very similar structure/vocals
+faster tempo
+
+#9
+very different but similar vocal style
+
+#10
+very different but would not be out of place in a playlist
+vocal style similar
+kinda similar structure
+
+
+me likes
+
+x
+
+./generator --dir=../test -c sorted -n 7 ../test/Goldfinger/The\ Best\ of\ Goldfinger/The\ Best\ of\ Goldfinger-10-99\ Red\ Balloons.mp3.vec ../test/The\ Avalanches/Since\ I\ Left\ You/Since\ I\ Left\ You-13-Frontier\ Psychiatrist.mp3.vec ../test/Panic!\ At\ the\ Disco/A\ Fever\ You\ Can\'t\ Sweat\ Out/A\ Fever\ You\ Can\'t\ Sweat\ Out-07-Lying\ Is\ the\ Most\ Fun\ a\ Girl\ Can\ Have\ Without\ Taking\ Her\ Clothes\ Off.mp3.vec
+                            
+Sneaker pimps to killswitch - very dissimilar songs
+transition into and away from saves the day works very well
+good playlist overall
+
+------------------------------
+#1 at first appeared to be the computer as the songs did sound similar in mood and tempo, however after listening closely to playlist 3 it became apparent that that was the computer generated one as there was a progression of music whereas number 1 just has a bunch of songs stuck togehter to form a list
+#2 is George and this is shown by the non progressive change in songs as the songs change in blocks. the first three songs of the play list are very similar to each other, as are the third and fourth, but tehy arent similar to each other. also george likes these bands and i am his girlfriend and can read him lke a book :)
+#3 is computer as the first three songs have very similar introductions and tempo, and the last 3 too!
+4 and 5 have the same layed back mood
+
+
+
+
+
+sorry i couldnt think of any big words im sure you#ll find them for me
+x
+x
+x
+
+
+
