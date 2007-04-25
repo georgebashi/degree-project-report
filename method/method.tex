@@ -1,4 +1,9 @@
 \chapter{Method, Design, and Implementation (3468/3500)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NEED TO TALK ABOUT THE IMPORTANCE OF SIMILARITY MEASURE TO     %
+% THE PERFORMANCE OF PLAYLIST GENERATION, AND HOW INTERPOLATION  %
+% ALLOWS THE SIMLIARITY MEASURE TO BE LESS RELIABLE              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Overview, Theory \& Principles}
 % Talk about how this works (decode audio, extract features, measure similarity, interpolate) as a general overview
 The system I have designed provides interpolative playlist generation based on sets of data calculated about each song in the user's media library. The process begins by running the \executable{extractor} program on each of the files in the media library, which begins the process of extracting data about each song known as \emph{features}. These features, calculated from the audio data itself, aim to be an absolute measure of the ``characteristic elements'' \citep{Fingerhut2004} of the sound (or \emph{timbre}), by using statistical functions to gain values based on psychoacoustics. That is to say, ideally, the extracted features become an absolute measure of the timbre of the song, such that two songs with similar features will sound similar. Once these features have been extracted and stored, the \executable{generator} program reads the stored feature vectors into memory and generates a playlist by measuring the distance between the feature vectors, hence giving the \emph{similarity} between songs.
