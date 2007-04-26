@@ -8,6 +8,7 @@
 	\subsubsection{#1}
 }
 \chapter{Specifications and Requirement Analysis (1789/2000)}
+\label{text:spec}
 \section{Overview}
 In order to investigate music similarity measure and its use in interpolative playlist generation, it is important to write a proof-of-concept piece of software which is capable of performing these functions, to show that the concepts discussed and the method proposed and designed are solid. A detailed specification of system behaviour has been designed in order to focus the development of this system; as stated in \citet{Bourque2004}, ``The Software Requirements Knowledge Area is concerned with the elicitation, analysis, specification, and validation of software requirements. It is widely acknowledged within the software industry that software engineering projects are critically vulnerable when these activities are performed poorly''. Specifying what is required of the software and the requirements of the software itself helps to design a system based around those goals and hence have a more succinct design and implementation. Additionally, later comparing the final system back to these specifications allows for critiquing of the system in terms of how well it met its goals and  assessing the viability of the system (or a future system based on the technique) for development into an end-user application.
 \section{System Objectives}
@@ -20,11 +21,7 @@ To achieve this, the system will be designed so that it is easy to debug, as wel
 \objective{Provide a simple method to analyse music and create playlists in batch for testing}
 % reading compressed files
 \label{text:spec:objective:cli}
-As the user's media library containing a large amount of audio files will need to be processed and a number of playlists generated for testing and debugging, it is important to have an interface to the program which allows for this. A command-line interface has been chosen, with the mode of operation and the files to process specified on the command-line and all output printed to the standard output and error streams.
-\note{this sentence makes no senses to me whatsoever}
- This simplifies the code needed to process options, and allows for batch scripts to be created which can automate testing. Also, operating without a GUI
-\note{you still need to define what a GUI is as your reader will have no clue}
- eases debugging of the system, which is important for the above requirement.
+As the user's media library containing a large amount of audio files will need to be processed and a number of playlists generated for testing and debugging, it is important to have an interface to the program which allows for this. A command-line interface has been chosen, with the mode of operation and the files to process specified on the command-line and all output printed back to console in a standard playlist format, allowing playlists to be directly loaded into a media player. This simplifies the code needed to process options, and allows for batch scripts to be created which can automate testing. Also, operating without a graphical user interface (GUI) eases debugging of the system, which is important for the above requirement.
 \objective{Allow components to be added and modified without (severely) affecting the operation of others}
 % Encapsulation / Abstraction
 Separating the concerns of similarity measure (audio processing and analysis) and playlist generation (statistical analysis) into separate programs means that the code itself will be better structured and hence easier to comprehend, which in turn means that it is easier to understand, develop, and test. As the algorithm for the similarity metric and playlist generation will be modified frequently during the development of the system, it is important that the two do not depend on each other more than necessary. Following the Object-Oriented design philosophy and its ideas of abstraction and encapsulation the software will be written in \software{C++}, and the program logic seperated into classes, each dealing only with their own data and processing.

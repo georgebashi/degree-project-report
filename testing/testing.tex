@@ -5,6 +5,7 @@
 	\label{graph:#1}
 \end{figure}}
 \chapter{Testing (3282/1000)}
+\label{text:testing}
 Testing the functioning, performance and accuracy of the system allows for evaluation as to how well the system meets its specification and purpose. Additionally, testing will help identify strengths, weaknesses, and areas for improvement of the system. Three approaches have been taken to the testing: functional, which will test that the system works as designed and meets specifications; automated testing, giving a measure of the algorithms used and their affect on results; and user testing, gaining feedback on the performance of the system as an accurate similarity metric and playlist generator.
 \section{Functional Testing}
 \label{text:testing:functional}
@@ -22,6 +23,7 @@ The following is an example run of the listener test:\\
 \input{testing/output/listener-test}
 The results from the test are then stored in \texttt{results.txt}.
 \subsection{\executable{learner}}
+\label{text:testing:functional:learner}
 After all songs were processed and the listener test was performed to gain around 100 results, the learner was run to calculate a set of weights:\\
 \input{testing/output/learner}
 As the weights are normalised in the range 0--1, it provides a human-readable estimation of the importance of each feature for the similarity measure. Table \ref{table:weights} is a labelled description of the weights:
@@ -68,6 +70,7 @@ Table \ref{table:testing_data} provides a summary of data from all tests.
 \input{testing/output/data-table}
 \pagebreak
 \section{User Testing}
+\label{text:testing:user}
 In order to gain valuable user feedback on the performance of the system with regards to similarity measure, three users with prior musical knowledge were asked to comment on playlists generated and a list of similar tracks. Also, to gain insight into the user's listening habits, the users were asked to comment on how they generally listened to music. The results of these interviews are summarised below.
 \subsection{Similarity Measure}
 The three users were shown the results of a query of the 10 most similar tracks to one of their choosing, and allowed to play and skip between tracks at will. They were then asked to make a few comments on the similarity of each track to the first.
@@ -106,6 +109,7 @@ User A correctly identified the three playlists, though having trouble different
 \subsubsection{User B}
 User B also correctly identified all three playlists. The random playlist was identified as it was said to lack coherence: although the tracks sounded similar to user B, there was no flow between the tracks, which seemed to jump between disparate genres with each track. The manually created playlist was identified as there was little progression seen in the playlist, with tracks being similar in groups of two or three songs. User B identified the computer generated playlist with ease, as it was said to have a very smooth transition between songs, with the first and last three songs having very similar opening sections and tempi.
 \subsubsection{User C}
+\label{text:testing:user:blind:c}
 After a great deal of scrutiny user C successfully identified all three playlists, though having trouble distinguishing the three, as the manual and random playlist both appeared quite randomly selected in nature, suggesting the importance of mood in a `good' playlist was overstated. Both the manual and random playlists were said to have abrupt changes in mood and genre, requiring user C to relisten a number of times before the descision was made on the manually created playlist as it seemed to have a progression in tempo towards the final track. The generated playlist was easily identified there were sections in neighbouring tracks that were very similar (generally the intro and chorus), and possessed a very smooth transition in genre.
 \section{Critique of Testing Method}
 %Work above 90\% will demonstrate understanding of the problems and limitations of evidence and arguments and the means by which they can be overcome
