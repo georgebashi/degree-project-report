@@ -4,7 +4,12 @@
 	\item Implications for policy and practice
 	\item Recommendations for action
 \end{itemize}
-\section{Why mine's better than any before! Ha HA!}
+\note{why mine's great and why others are better}
 \section{Alternative Methodologies}
-\section{Future Work and Extensions}
+Although the use of symbolic data was ruled out in the software review as being prone to error, techniques based on this have been employed by Amazon and Last.fm with good results. Amazon tracks a user's purchases assuming that users buy music of similar genres, Last.fm tracks user's play frequencies of tracks from their media library; this data is then used to suggest similar albums that the user may like. While this data does not provide the kind of track-level similarity measure possible with sub-symbolic methods, with a large amount of data symbolic methods produce less error in terms of genre. Combining the two techniques, using symbolic data as a long-range similarity measure and then narrowing down selection with a sub-symbolic method, would likely resolve problems found with tracks of disparate genres placed in a playlist.
 
+Alternative methods of generating playlists other than interpolation are of course possible, and it would be interesting to see this research adapted into an `intelligent random' system such as the ``Party Shuffle'' in iTunes. Again, using the symbolic data of ratings and play counts to randomly select key tracks would provide a completely non-interactive method of generating playlists with high coverage of the media library, whilst still providing continuity in tracks played.
+\section{Future Work and Extensions}
+Future work on the techniques and algorithms describe would best be focussed on the similarity metric. The playlist generation faired well in tests, requiring only minor tweaking to improve continuity and perhaps variance. A more accurate similarity measure, on the other hand, would provide much better playlist generation, perhaps by taking into account mood and genre as previously discussed. The modular design of the system allows for modifying the algorithms for playlist generation and similarity measure seperately; future work could then be focussed on trialling alternative similarity metrics to see which provides the best results for interpolative playlist generation, such as performed by \citet*{Berenzweig2003}. 
+
+Suggested in the specifications was a GUI to provide an interface with which end-users could generate playlists, further meeting the rationale of the project. The system as it stands meets objectives substantially enough to be developed into an end-user product; in this case, a further set of requirements would need to be assessed, such as reducing processing time and providing better error detection, prevention and recovery.
