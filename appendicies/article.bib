@@ -1,0 +1,220 @@
+@INPROCEEDINGS{Fingerhut2004,
+  author = {Michael Fingerhut},
+  title = {Music Information Retrieval, or how to search for (and maybe find)
+	music and do away with incipits},
+  booktitle = {IAML-IASA Congress},
+  year = {2004},
+  month = aug,
+  location = {Oslo (Norway)}
+}
+@INPROCEEDINGS{Pampalk2005a,
+  author = {Elias Pampalk and Tim Pohle and Gerhard Widmer},
+  title = {Dynamic Playlist Generation Based On Skipping Behavior},
+  booktitle = {ISMIR},
+  year = {2005},
+  __markedentry = {[george]},
+  citeseercitationcount = {0},
+  citeseerurl = {732589},
+  owner = {george},
+  pdf = {Pampalk2005a.pdf},
+  timestamp = {2007.03.20}
+}
+@INPROCEEDINGS{Aucouturier2002a,
+  author = {Jean-Julien Aucouturier and François Pachet},
+  title = {Finding Songs That Sound The Same},
+  booktitle = {IEEE Benelux Workshop on Model based Processing and Coding of Audio},
+  year = {2002},
+  month = {nov},
+  __markedentry = {[george]},
+  abstract = {A crucial dimension of Content-based music management systems is their
+	ability to compute automatically similarities between music titles.
+	We propose a technique that allows users to find music titles that
+	sound similar to songs they like. The technique relies on a modelling
+	of the timbral characteristics of a music signal by distributions
+	of Cepstrum coefficients. The resulting models are then compared
+	to yield a similarity measure. The paper describes the algorithm,
+	and proposes an evaluation of the quality of the extracted similarity
+	measure. Additionally, we illustrate the use of this measure in two
+	Electronic Music Distribution applications developed in the context
+	of the European project Cuidado.},
+  citeseercitationcount = {0},
+  citeseerurl = {http://citeseer.ist.psu.edu/671525.html},
+  owner = {george},
+  pdf = {Aucouturier2002a.pdf},
+  review = {The main drawback of these approaches is that they are essentially
+	content-blind; the music itself is ignored, and only users tastes
+	are considered. The resulting recommendations are therefore at best
+	superficially relevant. In this paper we propose to go further in
+	the direction of content-based extraction by computing automatically
+	music similarities between music titles based on their global timbral
+	quality. The motivation for such an endeavour is two fold. First,
+	although it is difficult to define precisely music taste, it is quite
+	obvious that music taste is often correlated with timbre. Some sounds
+	are pleasing to listeners, other are not. Some timbres are specific
+	to music periods (e.g. the sound of Chick Corea playing on an electric
+	piano), others to musical configurations (e.g. the sound of a symphonic
+	orchestra). In any case, listeners are sensitive to timbre, at least
+	in a global manner. There has been a large quantity of work about
+	timbre. However most of them have focussed on monophonic simple sound
+	samples, aiming at Instrument Recognition ([7]), i.e. identifying
+	if a note is being played on a trumpet or a clarinet. Here, we are
+	concerned with full polyphonic music and complex instrumental textures,
+	for which we want to extract a global timbre description. Among related
+	work in this domain, Automatic Genre Classification ([8]) tries to
+	categorize music titles into genre classes by looking at spectral
+	or temporal signal features. In this approach, the tested song?s
+	timbre is matched against pre-computed models of each possible genre.
+	Each genre model averages the timbre of a large number of songs that
+	are known to belong to this genre. There is no matching from one
+	song to another, but rather from one song to a group of songs. Music
+	title identification ([9]) deals with identifying the title and artist
+	of an arbitrary music signal. This is done by comparing the unlabelled
+	signal?s features to a database containing the features of all possible
+	identified songs. In this case, the matching is done from one song
+	to another, but the system only looks for exact matches, not for
+	similarity. Our system performs approximate matching of one song
+	to another. Similar timbres must be represented by close "points"
+	in a multi- dimensional feature space, and, conversely, close points
+	in this space should correspond to similar timbres. At the same time,
+	since we do not want to take into account the melodic content of
+	the songs, the feature set should be relatively independent of pitch.},
+  timestamp = {2007.03.20}
+}
+@TECHREPORT{Logan2001,
+  author = {Beth Logan and Ariel Salomon},
+  title = {A Content-Based Music Similarity Function},
+  institution = {Cambridge Research Laboratory},
+  year = {2001},
+  month = {jun},
+  __markedentry = {[george]},
+  abstract = {We present a method to compare songs based solely on their audio content.
+	Our technique forms a signature for each song based on K-means clustering
+	of spectral features. The signatures can then be compared using the
+	Earth Mover?s Distance [14] which allows comparison of histograms
+	with disparate bins. Preliminary objective and subjective results
+	on a database of over 8000 songs are encouraging. For 20 songs judged
+	by two users, on average 2.5 out of the top 5 songs returned were
+	judged similar. We also found that our measure is robust to simple
+	corruption of the audio signal and that meaningful visualizations
+	of the data are possible using this similarity measure.},
+  owner = {george},
+  pdf = {Logan2001.pdf},
+  timestamp = {2007.03.20}
+}
+
+@INPROCEEDINGS{Pauws2002,
+  author = {Steffen Pauws and Berry Eggen},
+  title = {PATS: Realization and User Evaluation of an Automatic Playlist Generator},
+  booktitle = {ISMIR},
+  year = {2002},
+  abstract = {A means to ease selecting preferred music referred to as Personalized
+	Automatic Track Selection (PATS) has been developed. PATS generates
+	playlists that suit a particular context- of-use, that is, the real-world
+	environment in which the music is heard. To create playlists, it
+	uses a dynamic clustering method in which songs are grouped based
+	on their attribute similarity. The similarity measure selectively
+	weighs attribute-values, as not all attribute-values are equally
+	important in a context-of-use. An inductive learning algorithm is
+	used to reveal the most important attribute-values for a context-of-use
+	from preference feedback of the user. In a controlled user experiment,
+	the quality of PATS- compiled and randomly assembled playlists for
+	jazz music was assessed in two contexts-of-use. The quality of the
+	randomly assembled playlists was used as base-line. The two contexts-of-use
+	were ?listening to soft music? and ?listening to lively music?. Playlist
+	quality was measured by precision (songs that suit the context-of-use),
+	coverage (songs that suit the context-of-use but that were not already
+	contained in previous playlists) and a rating score. Results showed
+	that PATS playlists contained increasingly more preferred music (increasingly
+	higher precision), covered more preferred music in the collection
+	(higher coverage), and were ratedhigher than randomly assembled playlists.},
+  owner = {george},
+  pdf = {Pauws2002.pdf},
+  timestamp = {2007.03.20}
+}
+@INPROCEEDINGS{Liu2003,
+  author = {Dan Liu and Lie Lu and Hong-Jiang Zhang},
+  title = {Automatic mood detection from acoustic music data},
+  booktitle = {ISMIR},
+  year = {2003},
+  __markedentry = {[george]},
+  abstract = {Music mood describes the inherent emotional meaning of a music clip.
+	It is helpful in music understanding, music search and some music-related
+	applications. In this paper, a hierarchical framework is presented
+	to automate the task of mood detection from acoustic music data,
+	by following some music psychological theories in western cultures.
+	Three feature sets, intensity, timbre and rhythm, are extracted to
+	represent the characteristics of a music clip. Moreover, a mood tracking
+	approach is also presented for a whole piece of music. Experimental
+	evaluations indicate that the proposed algorithms produce satisfactory
+	results.},
+  owner = {george},
+  pdf = {Liu2003.pdf},
+  timestamp = {2007.03.20}
+}
+@INPROCEEDINGS{Basili2004,
+  author = {Roberto Basili and Alfredo Serafini and Armando Stellato},
+  title = {Classification of musical genre: a machine learning approach},
+  booktitle = {ISMIR},
+  year = {2004},
+  owner = {george},
+  pdf = {Basili2004.pdf},
+  timestamp = {2007.03.20}
+}
+@INPROCEEDINGS{Muellensiefen2004,
+  author = {Daniel Müllensiefen and Klaus Frieler},
+  title = {Optimizing Measures Of Melodic Similarity For The Exploration Of
+	A Large Folk Song Database},
+  booktitle = {ISMIR},
+  year = {2004},
+  abstract = {This investigation aims at finding an optimal way of measuring the
+	similarity of melodies. The applicability for an automated analysis
+	and classification was tested on a folk song collection from Luxembourg
+	that had been thoroughly analysed by an expert ethnomusicologist.
+	Firstly a systematization of the currently available approaches to
+	similarity measurements of melodies was done. About 50 similarity
+	measures were implemented which differ in the way of transforming
+	musical data and in the computational algorithms. Three listener
+	experiments were conducted to compare the performance of the different
+	measures to human experts? ratings. Then an optimized model was obtained
+	by using linear regression, which combines the output of several
+	measures representing different musical dimensions. The performance
+	of this optimized measure was compared with the classification work
+	of a human ethnomusicologist on a collection of 577 Luxembourg folksongs.},
+  owner = {george},
+  pdf = {Muellensiefen2004.pdf},
+  timestamp = {2007.03.20}
+}
+@MASTERSTHESIS{Vossen2005,
+  author = {M. P. H. Vossen},
+  title = {Local Search for Automatic Playlist Generation},
+  school = {Technische Universitet Eindhoven: Department of Mathematics and Computing
+	Science},
+  year = {2005},
+  month = {jun},
+  owner = {george},
+  pdf = {Vossen2005.pdf},
+  timestamp = {2007.03.20}
+}
+@INPROCEEDINGS{Aucouturier2003,
+  author = {Jean-Julien Aucouturier and François Pachet},
+  title = {Scaling Up Music Playlist Generation},
+  booktitle = {Proceedings of {IEEE} {I}nternational {C}onference on {M}ultimedia
+	and {E}xpo ({ICME})},
+  year = {2003},
+  month = aug,
+  __markedentry = {[george]},
+  abstract = {The issue of generating automatically sequences of music titles that
+	satisfy arbitrary criteria such as user preferences has gained interest
+	recently, because of the numerous applications in the field of Electronic
+	Music Distribution. All the approaches proposed so far suffer from
+	two main drawbacks: reduced expressiveness and incapacity to handle
+	large music catalogues. We present in this paper a system that is
+	able to produce automatically music playlists out of large, real
+	catalogues (up to 200,000 titles), and that can handle arbitrarily
+	complex criteria. We describe the basic algorithm and its adaptation
+	to playlist generation, and report on experiments performed in the
+	context of the European project Cuidado.},
+  citeseercitationcount = {0},
+  citeseerurl = {http://citeseer.ist.psu.edu/669083.html},
+  pdf = {Aucouturier2003.pdf}
+}

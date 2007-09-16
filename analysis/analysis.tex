@@ -1,43 +1,15 @@
-\chapter{Analysis (1500)}
-\begin{comment}
-	\item Subject the findings to scrutiny as to what they might mean
-	\item Discussion and analysis of the theories, ideas, issues and challenges noted earlier in the writing. Do you have both intended and unintended outcomes?
-	\item A `making sense' of the findings by considering their implications for the questions raised
-	\item A critique of the research method (data collection tools?) used and their validity and reliability
-\end{comment}
-\section{Accuracy}
-Following user testing (page \pageref{text:testing:user}), it was determined that despite some deficiencies in track selection the playlists generated were generally of high quality; two of the three users found it difficult to distinguish the manually created and generated playlists, showing that the output of the system is on par with manual track selection. The main reason the generated playlists were identified was due to the lack of analysis of mood or tempo. To overcome this, a feature determining the tracking could be implemented, as well as a mood discriminating technique such as detailed by \citet*{Liu2003}.
+\section{Analysis}
+\subsection{Accuracy}
+User testing determined that the playlists generated were generally of high quality and on par with manual track selection. System generated playlists were generally identified due to the lack of analysis of mood or tempo. A tempo tracking feature could be implemented, as well as a mood discriminating technique such as detailed by \citet*{Liu2003} or a genre classification algorithm such as \citet*{Basili2004}.
 
-Satisfactory results were produced by the similarity metric described, with at least half of the top ten results for each track in testing being rated very similar. In testing, a small number of disparate songs were returned in results, usually appearing in playlists as one or two `bad' tracks per 17-track playlist, suggesting a greater amount of training required. As time for the project was limited a small training set of around 100 tracks was collected, and would need to be vastly increased for any future development, though training based on this set showed promising results in testing. The automated testing method used, while suitable for a heuristic evaluation of song comparison algorithms, could be further improved using a corpus of music pre-analysed by an expert musicologist \citep{Muellensiefen2004}, affording further insight into perceptual similarity comparisons.
+Satisfactory results were produced by the similarity metric, a small number of disparate songs were returned in results, usually appearing in playlists as one or two `bad' tracks per 17-track playlist, suggesting a greater amount of training required. This project was limited to a training set of around 100 tracks, which would need to be increased for future development. The automated testing method used, while suitable for a heuristic evaluation of song comparison algorithms, could be further improved using a corpus of music pre-analysed by an expert musicologist \citep{Muellensiefen2004}, affording further insight into perceptual similarity comparisons.
 
-Of the four track comparison algorithms compared, the sorted comparison performed by far the best. Although an unexpected result, the algorithm can quickly compare the most similar sections of a track, which was evidenced in user C's evaluation of the playlist generation (page \pageref{text:testing:user:blind:c}) and provide better similarity measure. Further testing may indicate that an algorithm which accounts for song structure, perhaps based on techniques described in \citet{Bruderer2006}, may work better in the playlist generation stage as all three test users remarked on structure when commenting on similarity.
+Of the four track comparison algorithms compared, the sorted comparison performed by far the best. To address user's comments on structure in playlist generation, an algorithm which takes this into account may in fact be more appropriate.
 
-The playlist generation technique described overall works well; while there are problems with inconsistant genre, mood and tempo (caused by the similarity metric), the generation of playlists with good continuity, variance and progression while avoiding the repetition of artists is achieved. The system aims to optimise the overall score of the playlist by keeping tracks which work best in the playlist, choosing to remove tracks where the artist is repeated and the score is low. Other techniques based on constraint satisfaction \citep{Vossen2005} and gaussian mixture modelling \citep{Aucouturier2003} have been implemented to optimise the total score of the playlist which is not considered in the algorithm described; the algorithm designed however is much less intensive, and hence better suits the design parameters.
-\section{Efficacy}
-As a whole, the system meets all design requirements set out in the specification, page \pageref{text:spec}. Making careful and informed choices about the method used helped to plan the system such that it was easily extensible and allowed for detailed in-depth testing.
+The playlist generation technique described overall works well. Playlists generated had good continuity, variance and progression while avoiding the repetition of artists. The system aims to optimise the overall score of the playlist by keeping tracks which work best in the playlist, choosing to remove other, low-scoring tracks. Other techniques based on constraint satisfaction \citep{Vossen2005} and Gaussian mixture modelling \citep{Aucouturier2003} have been implemented to optimise the total score of the playlist, the algorithm designed however is much less intensive and hence better suits the design parameters.
+\subsection{Efficacy}
+As a whole, the system meets all design requirements set out in the specification. The system processes audio files in a relatively short amount of time, owing to the avoidance of overly expensive features such as MFCCs, this also has implications for data storage. Playlists are generated very quickly, requiring only a matter of seconds to generate a playlist of reasonable length from a library of 1400 tracks. Verifiability and review is achieved by providing a binary file viewer and verbose output options. The system prints scores used in the similarity metric that proved valuable in testing, allowing analysis of any anomalous tracks in the playlist. The command-line interface provides an interface that allows creation of simple test scripts. It is well documented and would be simple for a future developer to understand.
+\subsection{Areas for Development}
+By nature the metric is an estimation, and hence it would never be possible to create a flawless model of perceptual similarity; nevertheless, the algorithm could be improved by adding specific features addressing tempo, mood and genre.
 
-The first research requirement of providing verifiability and review was achieved by providing a binary file viewer and verbose output options. \executable{generator} prints scores used in the similarity metric that proved valuable in testing, allowing analysis of any anomolous tracks in the playlist.
-
-The command-line interface used did its duty to provide an interface that allowed creation of simple test scripts. Written in \software{Ruby} to speed development time, \executable{listenertest.rb} was able to analyse the similarity metric in bulk and return useful statistical information for later analysis. Although clumsy for an end-user, the command-line interface is well documented (\texttt{--help} can be passed to any of the programs to obtain usage information) and as of such would be simple for a future developer to pick up and work on.
-
-Moving on to the user requirements, the system processes audio files in a relatively short amount of time (5--8 seconds per track on the development machine), owing to the careful choice and avoidance of overly expensive features such as MFCCs, which also helped achieve the requirement of small data storage. Playlists are generated very quickly, requiring only a matter of seconds to generate a playlist of reasonable length from a library of 1400 tracks.
-\section{Weaknesses}
-A number of weaknesses in the algorithms were detailed in the testing (page \pageref{text:testing}), such as the discovery and revision of the learning algorithm. In general terms, weaknesses were found in the similarity measure due to the lack of awareness of tempo, mood and genre. Adding specific features (and perhaps replacing the worst performing, page \pageref{text:testing:functional:learner}) would help mitigate this, though as by nature the metric is an estimation, and hence it would never be possible to create a flawless model of perceptual similarity.
-
-
-As the data set used in testing is an example user's media library, tracks will tend to be of relatively similar genre due to the user's tastes; a fairer test would involve collecting an equal number of examples of music from all main genres of music.
-\begin{itemize}
-	\item NaN problems
-	\item requirement of pre-processing tracks, speed of processing
-	\item similarity measure could have higher accuracy
-	\item similarity measure doesn't consider mood or genre
-	\item explain why the system doesn't have provisions for exploring the library (variance)
-\end{itemize}
-\begin{itemize}
-	\item Album effect, \citet*{Kim2006}
-	\item evaluating similarity measures \citet*{Aucouturier2004}
-	\item Automatic Music Transcription, transcription problem, symbolic similarity measure from subsymbolic data \citet*{Aucouturier2004}
-	\item Structure \citet*{Bruderer2006}
-	\item Refinement, training and optimisation, \citet*{Muellensiefen2004}
-	\item Local search, constraint satisfaction \citet*{Vossen2005}
-\end{itemize}
+The data set used for this small-scale test is an example user's media library. Tracks are therefore likely to be of relatively similar genre, due to the user's tastes. A fairer test would involve collecting an equal number of examples of music from all main musical genres.

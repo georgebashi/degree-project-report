@@ -4,117 +4,41 @@
 	\includegraphics[width=\textwidth]{testing/graphs/#1}
 	\label{graph:#1}
 \end{figure}}
-\chapter{Testing (3282/1000)}
+\section{Testing}
 \label{text:testing}
-Testing the functioning, performance and accuracy of the system allows for evaluation as to how well the system meets its specification and purpose. Additionally, testing will help identify strengths, weaknesses, and areas for improvement of the system. Three approaches have been taken to the testing: functional, which will test that the system works as designed and meets specifications; automated testing, giving a measure of the algorithms used and their affect on results; and user testing, gaining feedback on the performance of the system as an accurate similarity metric and playlist generator.
-\section{Functional Testing}
-\label{text:testing:functional}
-To show correct operation of the system and give examples of generated playlists, excerpts of the output of the program are given along with some example queries and their output.
-\subsection{\executable{extractor}}
-For this test, the feature extractor was run on three tracks from \emph{Kasabian}'s album, \emph{Empire}.\\
-\input{testing/output/extractor}
-The three tracks were processed, and the features written out to files on disk, 12KB, 8KB and 24KB in size respectively.
-\subsection{\executable{viewer}}
-To show the operation of \executable{viewer}, it was run on one of the feature vectors outputted by \executable{extractor} above, to show the feature blocks (output summarised).\\
-\input{testing/output/viewer}
-As can be seen from the inspection of the first feature, the track begins with a repeated guitar riff, followed by the later entry of the vocals which can be seen by the rising values of the mean of zero crossing rate. This simple test shows that the feature extractor works correctly, and that the features change with events in the track.
-\subsection{\executable{listenertest.rb}}
-The following is an example run of the listener test:\\
-\input{testing/output/listener-test}
-The results from the test are then stored in \texttt{results.txt}.
-\subsection{\executable{learner}}
-\label{text:testing:functional:learner}
-After all songs were processed and the listener test was performed to gain around 100 results, the learner was run to calculate a set of weights:\\
-\input{testing/output/learner}
-As the weights are normalised in the range 0--1, it provides a human-readable estimation of the importance of each feature for the similarity measure. Table \ref{table:weights} is a labelled description of the weights:
-\input{testing/output/weights-table}
-
-As can be seen from the weights returned, the mean of each feature proved the most valuable, along with spectral smoothness as by far the most important extractor. The energy performed the worst of all extractors perhaps due to it's variability; the gain of the recording (how loud it is recorded/stored) will directly affect this extractor---it would perhaps work better if the tracks were normalised before or during processing.
-
-The kurtosis of each feature extractor faired much worse than expected. This is perhaps due to the nature of the processing: features are collected in three-second blocks and it would be unusual to see a rise and fall to create a peak in features in one block.
-
-The weights returned by \executable{learner} were pasted into the code of \executable{generator} and recompiled, to be used in subsequent testing.
-\pagebreak
-\subsection{\executable{generator}}
-\subsubsection{Similarity Measure}
-For the first test, the playlist generator was run to provide the 50 most similar tracks to the given song, \emph{Quick and to the Pointless} by \emph{Queens of the Stone Age}. NB: there was only one \emph{Queens of the Stone Age} track in the media library, hence no others appearing in the results. The distance for each track appears in brackets after the file name.\\
-\input{testing/output/generator-similar}
-This example query shows a high accuracy in similarity measure---track one is very similar in all aspects, and the tracks following slowly reduce in similarity. The first \emph{outlier} is \emph{Junior Senior}, track 9, which does not appear very similar at all. Continuing on from that, the tracks only become dissimilar enough to not sit well in a playlist from track 29 onwards, though still continuing in order of similarity, suggesting a good long-range accuracy of the similarity measure. 
-\subsubsection{Playlist Generation}
-To test the playlist generation, two playlists were generated to highlight difficulties in creating `good' playlists with the technique described: a short playlist between two tracks disparate in genre (as it is difficult to create a smooth progression with only a small amount of tracks), and a long playlist between two similar songs (as finding tracks by \emph{different artists} which can create a smooth transition is difficult).
-
-First, the short playlist, between a fast-paced aggressive track by \emph{System of a Down}, and a slow, calm and atmospheric track by \emph{Four Tet}.\\
-\input{testing/output/generator-playlist-short}
-Second, the long playlist, between two tracks by \emph{Saves the Day}, both melodic, up-beat songs with vocals.\\
-\input{testing/output/generator-playlist-long}
-It can be seen that in both playlists, \executable{generator} found difficulty in generating a `good' playlist while still adhering to the no-repeated-artists rule. In the short playlist, the middle track by \emph{RJD2}, works well as a half-way point between the two tracks posessing a similar beat and tempo to the \emph{Four Tet} track, while still having similar instrumentation to the \emph{System of a Down} track. The \emph{Saves the Day} and \emph{Basement Jaxx} are not as similar as would have been hoped and do not fit well in the progression due to their differing genres, though they do posess similar rhythm and instrumentation to the two neighbouring tracks.
-
-In the second playlist, where \executable{generator} had to interpolate 15 tracks between two very similar songs the same pattern as the previous was shown, where the middle track (\emph{Already Dead} by \emph{Silverstein}) was a good half-way point, similar to both key tracks. The other tracks, however, showed an interesting progression, as the genre of the tracks seemed to work towards and away from the center while not being similar to the two key tracks, suggesting some improvement needed in the selection of tracks to drop in the case of repeated artists.
-\pagebreak
-\section{Automated Testing}
-As discussed previously (in Method, page \pageref{text:method:weight_optimisation}), it is possible to use the output from the listener test to rate the system's accuracy before and after training. For each of the results, \executable{evaluate.rb} generates a playlist with each of the four comparison methods. The average position of the similar and not-similar tracks are then taken, along with their standard deviation and the difference between placement of the similar and not-similar track. Low values for the average placement of similar tracks and standard deviation, as well as high values for the difference between similar and not-similar would indicate an accurate system.
+Three approaches have been taken to the testing: functional testing of the system; automated testing of the affect of the four algorithms on the results; and user testing of performance.
+\subsection{Automated Testing}
+Once functional testing was completed (to ensure correct operation of the system), automated testing using the results of the music quiz was performed. For each result from the music quiz, the music library was sorted according to similarity to \emph{similar track A}; the system was then rated how high it placed \emph{similar track B} and how low it placed the \emph{not-similar track}.
 \subsection{Results}
-Figure \ref{graph:metric-comparison} shows a comparison of the four track comparison methods detailed on page \pageref{text:method:comparison_methods}, before any training (all weights set to 1). While the two algorithms which take structure into account (Ordered and Ordered Area) provided better similar and non-similar placement difference and hence better distinction between tracks, Sorted and Exhaustive had a lower standard deviation, suggesting a more reliable metric. It is clear from these results that the sorted comparison performed the best overall, having a higher average placement of the similar tracks, a relatively high difference between similar and not-similar placement, and a standard deviation much less than that of the ordered area comparison.
+Figure \ref{graph:metric-comparison} shows a comparison of the four track comparison methods, before any training (all weights set to 1). It is clear from these results that the sorted comparison performed the best overall, having a higher average placement of the similar tracks, a relatively high difference between similar and not-similar placement, and a standard deviation in placement much less than that of the ordered area comparison.
 \graph{metric-comparison}{Comparison of Similarity Metrics}
 
-To test the efficiency of the training of the system, \executable{evaluate.rb} was run before and after training, to show the affect of training. After an initial test, it was shown that training the system actually provided \emph{worse} accuracy.  To investigate this further, I modified the source code of \executable{learner} to either only train on the albums in the user's media library or on the answers from the listener test, and re-ran the test (figure \ref{graph:training-method-comparison}). As there is more data available for the album training than the test answer training, it can be seen that the more data used in training, the worse the accuracy of the similarity metric, as if the system were training \emph{away} from the data set. On re-evaluating the algorithm used to train the data (formula \ref{eq:weight_optimisation_old}, page \pageref{eq:weight_optimisation_old}), I dropped the subtraction from one, and reran the test. 
-\graph{training-method-comparison}{Comparison of Training Methods}
-
-Previously, the algorithm worked by subtracting the distance between features from one, such that two similar features would increase the weight more than two disparate features, which logically seems sound. Figure \ref{graph:training-algorithm-comparison} shows the similar track placement with an untrained system, a trained system, and a system trained with the new algorithm (formula \ref{eq:weight_optimisation_new}).
-\input{formulae/weight_optimisation_new}
+Testing of the training algorithm showed that more refinement was needed; after subsequent amendments, the results proved much better than both an untrained system and one trained with the old algorithm: a reduced mean and standard deviation of placement of similar track, and a much larger difference in similar and not-similar placement.
 \graph{training-algorithm-comparison}{Comparison of Training Algorithms}
 
-The results from the new algorithm proved much better than both an untrained system and one trained with the old algorithm: a reduced mean and standard deviation of placement of similar track, and a much larger difference in similar and not-similar placement. Training the system in the previous manner may have served to smooth the differences between features across the data set, as large differences would end up having a smaller weight and hence be reduced to small differences, and vice-versa. Training in this way does the opposite; large distances between individual features are made larger, and hence tracks would need to be very similar in that feature for it to have a large affect on the overall distance. This new algorithm was used in all subsequent testing, as it has overall better performance.
-
-Table \ref{table:testing_data} provides a summary of data from all tests.
-\input{testing/output/data-table}
-\pagebreak
 \section{User Testing}
 \label{text:testing:user}
-In order to gain valuable user feedback on the performance of the system with regards to similarity measure, three users with prior musical knowledge were asked to comment on playlists generated and a list of similar tracks. Also, to gain insight into the user's listening habits, the users were asked to comment on how they generally listened to music. The results of these interviews are summarised below.
-\subsection{Similarity Measure}
-The three users were shown the results of a query of the 10 most similar tracks to one of their choosing, and allowed to play and skip between tracks at will. They were then asked to make a few comments on the similarity of each track to the first.
-\subsubsection{User A}
-User A chose to evaluate the similarity measure on \emph{Roll On} by \emph{Sneaker Pimps}, a down-tempo track with female vocals, a deep bass sound and a punctuated breakbeat rhythm; figure \ref{fig:testing:user:similarity:a}. User A began by saying that the tempo of the first three tracks were greatly increased from the key song chosen. The first four results were overall very similar, especially in instrumentation and rhythm. The first deviation in genre was noted at track five, where there was a ``change of pace and style''. Although the structure and instrumentation were different, the track was still heard to be reasonably similar. User A said that track seven onwards seemed to be almost entirely different in style; it was much slower yet still having similar vocals, which may have caused the similarity measure to rate this track in the top 10 most similar.
-\input{testing/user-testing/similarity-user-a}
-
-It is obvious from the results that while the system was able to find a number of similar tracks, they quickly diminished in similarity, when there are other similar tracks on the same album (\emph{Becoming X}) which were not listed. User A picked up immediately on the changes in tempo for reasons why the tracks were not similar; as the system does not have any feature which is affected greatly by the tempo of the track, adding this may increase similar track selection accuracy.
-\subsubsection{User B}
-User B chose to evaluate \emph{Colours} by \emph{Hot Chip} (figure \ref{fig:testing:user:similarity:b}), another down-tempo track, this time more electronic with a solid four-to-the-floor beat. As with User A, the immediate observation was that the tempo of the first three tracks was increased, yet the timbre was similar. Track two, while being of a completely different genre, had a very similar timbre, enough that it would be considered perceptually similar.
-\input{testing/user-testing/similarity-user-b}
-
-Track four was noted as being an outlier; apart from a similar song structure and perhaps a similar rhythm, it was very dissimilar. Track six was noted as being relatively similar, perhaps moreso than ones previously in the playlist. 7--10 however were said to be quite disparate from the others, though having a similar vocal style.
-
-The similarity metric overall seemed to perform worse than for the track selected by user A. User B suggested that tracks two, three and five were the most similar and should have appeared higher in the ranking, with track one perhaps being in place of track five. To investigate further, \executable{generator} was rerun showing the scores assigned to each track (using the \texttt{-v} flag). The scores returned for the ten tracks were in the range 0.434--0.489, showing that the tracks all occupied a small area in the feature space, possibly accounting for the confusion of ordering of results.
-\subsubsection{User C}
-User C evaluated \emph{Like Eating Glass (Ladytron Zapatista Remix)} by \emph{Bloc Party} (figure \ref{fig:testing:user:similarity:c}), a repetitive electro remix with vocal samples of the original. User C gave the overall impression that the tracks returned were very similar, especially in tempo, though each differing in one aspect. Track one, while being synthy and repetitive, lacked vocals yet was similar in mood and genre. Track two was more upbeat, yet had very similar rhythm and genre. The first outlier was track four, which was faster, of a completely different genre of mood, and had very dissimilar vocals. The similar sounding percussion and structure however may have accounted for this.
-\input{testing/user-testing/similarity-user-c}
-\subsection{Playlist Generation}
-In the next test, the three users were allowed to select three tracks to make a playlist; hence having two interpolation regions. They were then asked to comment on how well the playlist `flowed', ie.\ its continuity.
-\subsubsection{User A}
-User A chose a playlist with the tracks \emph{X Dummy} by \emph{Trash Palace}, \emph{Leave Them All Behind} by \emph{Whitey} and \emph{Kalamazoo} by \emph{Primus}. Figure \ref{fig:testing:user:playlist:a} shows the results of this query.
-
-User A chose to comment on the second half of the playlist, the interpolation between \emph{Whitey} and \emph{Primus}. It was however noted that two tracks by \emph{Alkaline Trio} appeared in the first half of the playlist, suggesting a bug in how the artist's name is extracted. User A found that while each track was similar in it's own right with no tracks `sticking out' in the playlist, the tracks failed to flow, frequently changing in genre. This did however produce an interesting result in the choice of \emph{The Cinematic Orchestra} for the track preceding the \emph{Primus} key; it was similar both in tempo, rhythm and instrumentation and flowed well into the next track, though proved unexpected as the tracks were from completely differing genres.
-\input{testing/user-testing/playlist-user-a}
-\subsubsection{User B}
-User B chose \emph{99 Red Balloons} by \emph{Goldfinger}, \emph{Frontier Psychiatrist} by \emph{The Avalanches} and \emph{Lying Is the Most Fun a Girl Can Have Without Taking Her Clothes Off} by \emph{Panic at the Disco} for their playlist, figure \ref{fig:testing:user:playlist:b}. Commenting on the first half of the playlist, user B said that overall the playlist worked well, having a very smooth transition of music towards and away from \emph{The Avalanches}, and having a generally good flow of mood and genre. One problem noted was a very apparent `jump' in genre from track four to five; to investigate this the 50 most similar tracks to track four (\emph{Bad Religion}) were listed. Track five (\emph{Sneaker Pimps}) appeared as the 13th most similar track, with all previous being by artists appearing elsewhere in the playlist. This would mean the reason for the jump in genre was created in the repeated artist exclusion process, as tracks elsewhere were deemed better fitting, forcing this entry in the playlist to choose a track of low similarity.
-\input{testing/user-testing/playlist-user-b}
-\subsubsection{User C}
-User C analysed the first half of a playlist generated with \emph{Gangsters and Thugs} by \emph{The Transplants}, \emph{Superman} by \emph{Goldfiger} and \emph{Ebolarama} by \emph{Every Time I Die} (figure \ref{fig:testing:user:playlist:c}). Similar to the `jump' noted by user B, track two seemed relatively distant from the first to user C. Continuing from this track, the playlist was evaluated to work very well creating a playlist with a smooth transition in genre, though having some tracks of considerably slower tempo (such as track four).
-\input{testing/user-testing/playlist-user-c}
-\subsection{Blind trialling}
-In order to evaluate the overall performance and accuracy of the system, a double-blind test was conducted where the user had to correctly identify a set of three playlists, one created randomly, one by the system, and one by the author. A short overview of the project and the aim of the system was given, in order to give context to the test being performed. The users were allowed as much time as necessary and could freely play back and skip through the three playlists before giving an answer. A short script was written to play back playlists in a random order and the author was not present during testing, in order to eliminate any possible bias in testing.
-\subsubsection{User A}
-User A correctly identified the three playlists, though having trouble differentiating the manually created and generated ones. The random playlist was quickly identified as the tracks were of very different genres, though user A found the other two playlists to be of very coherent genre throughout. After a number of replays of the manually created and generated playlists, user A came to their decision based on the mood of the tracks; the manual playlist had a more homogeneous and progressive change of mood throughout, whereas the generated one changed mood abruptly towards the end of the playlist.
-\subsubsection{User B}
-User B also correctly identified all three playlists. The random playlist was identified as it was said to lack coherence: although the tracks sounded similar to user B, there was no flow between the tracks, which seemed to jump between disparate genres with each track. The manually created playlist was identified as there was little progression seen in the playlist, with tracks being similar in groups of two or three songs. User B identified the computer generated playlist with ease, as it was said to have a very smooth transition between songs, with the first and last three songs having very similar opening sections and tempi.
-\subsubsection{User C}
-\label{text:testing:user:blind:c}
-After a great deal of scrutiny user C successfully identified all three playlists, though having trouble distinguishing the three, as the manual and random playlist both appeared quite randomly selected in nature, suggesting the importance of mood in a `good' playlist was overstated. Both the manual and random playlists were said to have abrupt changes in mood and genre, requiring user C to relisten a number of times before the descision was made on the manually created playlist as it seemed to have a progression in tempo towards the final track. The generated playlist was easily identified there were sections in neighbouring tracks that were very similar (generally the intro and chorus), and possessed a very smooth transition in genre.
+Three users with prior musical knowledge evaluated the system under the headings of similarity measure, playlist generation, and a blind-trialling test given. These evaluations highlighted the following:
+\begin{itemize}
+	\item Similarity Measure
+	\begin{itemize}
+		\item System had high accuracy when dealing with percussion, vocal style and instrumentation
+		\item System tended to return songs of similar mood
+		\item System dealt less well with tempo, due to the lack of tempo-related features
+	\end{itemize}
+	\item Playlist Generation
+	\begin{itemize}
+		\item Playlists flowed well in rhythm and instrumentation
+		\item Long playlists caused dissimilar tracks to be played, due to the \emph{no repeated artists} rule
+	\end{itemize}
+	\item Blind-trialling of three playlists: random, manually created, and system generated
+	\begin{itemize}
+		\item All playlists correctly identified, users less secure in distinguishing system and manually created ones
+		\item Random playlist quickly identified due to lack of coherence in genre; users found differentiation between other two playlists difficult due to similar properties
+	\end{itemize}
+\end{itemize}
 \section{Critique of Testing Method}
 %Work above 90\% will demonstrate understanding of the problems and limitations of evidence and arguments and the means by which they can be overcome
-The testing methods used, while designed to be as objective as possible, have a number of shortcomings which could be overcome to produce more accurate and informative results. The automated statistical testing used the training data set to test the functionality of the system; while this proves a useful metric for testing the accuracy of the system, it fails to test the generalisation of the system to music other than that in the test set. To provide an objective test of the generalisation of the system, a larger set of results from \executable{listenertest.rb} would be gathered, which could be split into a test and training set.
+The testing methods held implications for more accurate results. The listening test could be modified to gain feedback from the user about \emph{how} similar the two tracks are, allowing refinement both of the training algorithm and the testing metric, comparing the expected and actual placement of tracks.
 
-The listening test itself could be improved, as currently no feedback is gained from the user about \emph{how} similar the two tracks chosen are. This additional data would both provide a more accurate training algorithm based on the relative similarity of tracks, and a more accurate testing metric comparing the expected and actual placement of tracks in the similarity ranking.
-
-The two subjective tests of similarity measure and playlist generation, while useful to gain feedback on flaws in the model of perceptual similarity measure and playlist generation, provide a rough qualitative measure of the performance of the system, easily swayed by the user's appreciation of a genre of music or musical education. A set of playlists generated by expert users could be used to train the system based on empirical evidence; again if this were split into a training and test set, a quantative measure of the quality of a playlist could be developed.
+The two subjective tests of similarity measure and playlist generation are useful to gain feedback on flaws in the model of perceptual similarity measure and playlist generation, and provides a rough qualitative measure of the performance of the system. A set of playlists generated by expert users could be used to train the system based on empirical evidence; if this were split into a training and test set, a quantitative measure of the quality of a playlist could be developed.

@@ -1,10 +1,10 @@
 #!/bin/sh
 if [ -z $1 ]
 then
-	find . -name '*.tex' | grep -Ev "appendicies|formulae|front|testing/output|testing/user-testing" | xargs cat | grep -v "\item" > /tmp/wordcount
+	find . -name '*.tex' | grep -Ev "report|appendicies|formulae|title-page|front|testing/output|testing/user-testing" | xargs cat | grep -v "\item" | grep -v "\caption" > /tmp/wordcount
 elif [ "$1" = "`pwd`/report.tex" ]
 then
-	find . -name '*.tex' | grep -Ev "appendicies|formulae|front|testing/output|testing/user-testing" | xargs cat | grep -v "\item" > /tmp/wordcount
+	find . -name '*.tex' | grep -Ev "report|appendicies|formulae|title-page|front|testing/output|testing/user-testing" | xargs cat | grep -v "\item" | grep -v "\caption" > /tmp/wordcount
 else
 	cat $1 | grep -v "\item" > /tmp/wordcount
 fi

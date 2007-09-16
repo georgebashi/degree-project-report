@@ -1,20 +1,2 @@
-\chapter{Introduction (600/500)}
-\begin{comment}
-	\item rationale
-	\item purpose
-	\item issues
-	\item context
-	\item relevance
-	\item structure of dissertation
-\end{comment}
-In recent years, advances in digital audio compression techniques as well as the ever-increasing popularity of the Internet and on-line music stores have allowed the home computer user to amass a large amount of music with relative ease; the storage and retrieval of music has become simple enough that a purchased album need only be a few clicks away. Despite this, the method of playback has remained unchanged, with most users selecting and playing back an album at a time, with interfaces analogous to selecting and playing back a record, tape or CD. It is possible to create a \emph{playlist}, where the user can add individual songs to a queue, which can be saved and loaded alongside the media library.
-
-While creating playlists allows the user to listen to a variety of music in a session, it is a long and difficult process to find, preview and select a number of songs which will fit the \emph{context of use}, such as listening to music while working, exercising or cleaning. Software such as the system described in this report provide \emph{playlist generation} to the user, aiming to ease the selection of music fitting the context of use and allow the user to listen to music in a new way.
-
-Interpolative playlist generation involves the user specifying a set of \emph{key tracks}, with a specified number of songs between them. The system then `fills the gaps' between these, generating playlists with a smooth musical transition between the keys. Selecting music to play in this manner allows the user to generate playlists by example, rather than having to precisely specify the content with semantic attributes such as year published or genre.
-
-In order to select music for playlist generation, a metric is described which works solely on audio data by using statistical functions to estimate perceptual similarity between tracks. Songs similar to the keys are used to fill the playlist, based on a set of rules of `good' playlist generation.
-
-The system, once developed, would hope to create novel and interesting playlists either equivalent to or better than a user could themselves. The difficulty in this lies in what is known as the automated music transcription problem \citep{Hainsworth2004}; it is very difficult for a human to be able to listen to a recording and re-write the score from which it came and as of such is an unsolved problem in computational music research. Even with a full transcription of a piece, it is impossible for a computer system to accurately measure similarity, due to the lack of understanding of mood or context of a piece. Current similarity metrics aim to overcome this either by inferring similarity through attributes such as artist and genre tags (tracks by the same artist are most likely similar, for example), or by using models of audio perception, and hence are by nature inaccurate. Interpolative playlist generation reduces the reliance on an overly accurate similarity metric by guiding the system through the playlist; in addition, a method for training the system based on an expert user's input of similar tracks is described.
-\section{Structure of Dissertation}
-This report contains a full description, evaluation and analysis of a music similarity metric and playlist generator developed during my final year of study. I will begin by giving a review of current similar research and software in the area of playlist generation and music similarity measure, and go on to describe and implement a method for interpolative playlist generation. After implementing these techniques, they will be tested on a corpus of tracks from an example music library, and the performance and accuracy of the implemented methods evaluated.
+\section{Introduction}
+While creating playlists allows the user to listen to a variety of music, it is a lengthy process to select a number of songs which will fit the \emph{context of use}, such as working, exercising or cleaning. The system described provides \emph{playlist generation}, using a metric which works solely on audio data by using statistical functions to estimate perceptual similarity between tracks. Songs similar to the key tracks are used to fill the playlist, based on a set of rules of `good' playlist generation. In this way, novel and interesting playlists are created, either equivalent to or better than a user-generated playlist.
